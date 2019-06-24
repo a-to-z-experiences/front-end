@@ -1,3 +1,5 @@
+// importing axios so we can post to the login url when a user clicks login, or post with register? don't know
+import axios from "axios";
 // creating login variables for action types
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -18,7 +20,20 @@ export const GET_EXPERIENCES_DATA_SUCCESS = "GET_EXPERIENCES_DATA_SUCCESS";
 export const GET_EXPERIENCES_DATA_FAILURE = "GET_EXPERIENCES_DATA_FAILURE";
 
 // creating login action creator
-export const login = () => dispatch => { };
+export const login = () => dispatch => {
+  dispatch({ type: LOGIN_START });
+  axios
+    .post("https://atoz.herokuapp.com/login")
+    .then(response => {
+      console.log("RESPONSE: ", response);
+      localStorage.setItem("token", response.data.token);
+      dispatch({ type: LOGIN_SUCCESS });
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+      dispatch({ type: LOGIN_FAILURE, payload: "Username or Password is incorrect" });
+    });
+};
 
 // creating register action creator
 export const register = () => dispatch => {};

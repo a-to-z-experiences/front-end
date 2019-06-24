@@ -10,7 +10,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 // importing Provider so we can pass our store prop into it that'll give our inner components access to it
 import { Provider } from "react-redux";
 // importing Router so App can use match location history I think?
-import { Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 // importing thunk so we can use the dispatch method manually within our thunk function that gets returned in our action creators
 import thunk from "redux-thunk";
 // importing logger so we can see the actions being dispatched and whether our calls were successful or not

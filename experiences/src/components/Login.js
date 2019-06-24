@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+// import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
+// import login and register action creators
+import { login, register } from "../actions";
 
 class Login extends Component {
   state = {
@@ -22,17 +25,30 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.changeHandler}
           />
-          <button>Login</button>
-          <button>Register</button>
+          <button onClick={this.loginHandler}>Login</button>
+          <button onClick={this.registerHandler}>Register</button>
         </form>
       </div>
     );
-  }
-  changeHandler(event) {
+  }log
+
+  // changeHandler for the user typing
+  changeHandler = event => {
     event.preventDefault();
-    this.setState({ [event.target.name]: event.target.value });
-  }
-  submitLogin(event) {}
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+  // loginHandler for the Login button
+  loginHandler = event => {
+    event.preventDefault();
+    this.props.login(this.state);
+  };
+  // registerHandler for the Login button
+  registerHandler = event => {
+    event.preventDefault();
+    this.props.register(this.state);
+  };
 }
 const mapStateToProps = state => {};
 // linking mapStateToProps, action creators to Login component

@@ -15,8 +15,8 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <PrivateRoute exact path="/" component={UserHome} />
       <Route path="/login" component={Login} />
+      <PrivateRoute path="/home" component={UserHome} />
       <Route path="/experiences" component={AvailableExperiences} />
     </div>
   );

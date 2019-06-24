@@ -1,6 +1,7 @@
 import React from "react";
 // importing route so we can direct a route for a specific url
-import { Route } from "react-router-dom";
+// import withRouter so App can access location, history, match props?
+import { Route, withRouter } from "react-router-dom";
 // importing PrivateRoute which displays another component conditionally on the token in localStorage
 import PrivateRoute from "./components/PrivateRoute";
 // importing UserHome
@@ -22,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

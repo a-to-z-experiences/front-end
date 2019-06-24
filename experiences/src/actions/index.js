@@ -31,12 +31,31 @@ export const login = () => dispatch => {
     })
     .catch(error => {
       console.log("ERROR: ", error);
-      dispatch({ type: LOGIN_FAILURE, payload: "Username or Password is incorrect" });
+      dispatch({
+        type: LOGIN_FAILURE,
+        payload: "Email or Password is incorrect"
+      });
     });
 };
 
 // creating register action creator
-export const register = () => dispatch => {};
+export const register = () => dispatch => {
+  dispatch({ type: REGISTER_START });
+  axios
+    .post("https://atoz.herokuapp.com/register") // or /users?
+    .then(response => {
+      console.log("RESPONSE: ", response);
+      localStorage.setItem("token", response.data.token);
+      dispatch({ type: REGISTER_SUCCESS });
+    })
+    .catch(error => {
+      console.log("ERROR: ", error);
+      dispatch({
+        type: REGISTER_FAILURE,
+        payload: "Email or Password is taken or invalid"
+      });
+    });
+};
 
 // creating getUserData action creator
 export const getUserData = () => dispatch => {};

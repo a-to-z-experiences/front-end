@@ -12,6 +12,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
+        {this.props.error && <div>{this.props.error}</div>}
         <form>
           <input
             name="email"
@@ -30,7 +31,8 @@ class Login extends Component {
         </form>
       </div>
     );
-  }log
+  }
+  log;
 
   // changeHandler for the user typing
   changeHandler = event => {
@@ -50,7 +52,12 @@ class Login extends Component {
     this.props.register(this.state);
   };
 }
-const mapStateToProps = state => {};
+// creating mapStateToProps fn that takes in state from reducers. We pass props to Login by utilizing the reducer's state
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  };
+};
 // linking mapStateToProps, action creators to Login component
 export default connect(
   mapStateToProps,

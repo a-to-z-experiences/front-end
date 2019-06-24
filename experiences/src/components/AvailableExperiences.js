@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class AvailableExperiences extends Component {
+class AvailableExperiences extends Component {
     render() {
         return (
             <div>
@@ -9,3 +9,15 @@ export default class AvailableExperiences extends Component {
         )
     }
 }
+
+// creating mapStateToProps fn that takes in state from reducers. We pass props to Login by utilizing the reducer's state
+const mapStateToProps = state => {
+  return {
+    error: state.error
+  };
+};
+// linking mapStateToProps, action creators to Login component
+export default connect(
+  mapStateToProps,
+  { login, register }
+)(Available);

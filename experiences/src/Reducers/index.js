@@ -18,7 +18,9 @@ const initialState = {
   loggingIn: false,
   registering: false,
   gettingUserData: false,
-  gettingExperiencesData: false
+  gettingExperiencesData: false,
+  userArray: [],
+  availableExperiencesArray: []
 };
 // creating rootReducer fn. takes in a state object, action object, and returns a new state depending on the type property within the action object
 export const rootReducer = (state = initialState, action) => {
@@ -69,7 +71,8 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gettingUserData: false,
-        error: ""
+        error: "",
+
       };
     case GET_USER_DATA_FAILURE:
       return {
@@ -81,13 +84,14 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         gettingExperiencesData: true,
-        error: ""
+        error: "",
       };
     case GET_EXPERIENCES_DATA_SUCCESS:
       return {
         ...state,
         gettingExperiencesData: false,
-        error: ""
+        error: "",
+        availableExperiencesArray: action.payload
       };
     case GET_EXPERIENCES_DATA_FAILURE:
       return {

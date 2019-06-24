@@ -32,7 +32,6 @@ class Login extends Component {
       </div>
     );
   }
-  log;
 
   // changeHandler for the user typing
   changeHandler = event => {

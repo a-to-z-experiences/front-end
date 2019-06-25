@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+// import connect to connect the action creators and props we want from reducer's state to component
+import { connect } from "react-redux";
 
 class AvailableExperiences extends Component {
     render() {
@@ -20,4 +22,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { login, register }
-)(Available);
+)(AvailableExperiences);

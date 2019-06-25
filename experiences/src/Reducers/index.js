@@ -1,4 +1,4 @@
-// importing action type variables from actions folder to use as cases so no mispelling is involved
+// importing action type variables from actions folder to use as cases so no misspelling is involved
 import {
   LOGIN_START,
   LOGIN_SUCCESS,

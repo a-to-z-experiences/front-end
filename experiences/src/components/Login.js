@@ -12,6 +12,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
+        <header>Sign up/Login</header>
         {this.props.error && <div>{this.props.error}</div>}
         <form>
           <input

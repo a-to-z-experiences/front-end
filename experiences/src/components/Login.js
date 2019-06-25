@@ -6,7 +6,7 @@ import { login, register } from "../actions";
 
 class Login extends Component {
   state = {
-    email: "",
+    username: "",
     password: ""
   };
   render() {
@@ -16,9 +16,9 @@ class Login extends Component {
         {this.props.error && <div>{this.props.error}</div>}
         <form>
           <input
-            name="email"
-            placeholder="Enter email here"
-            value={this.state.email}
+            name="username"
+            placeholder="Enter username here"
+            value={this.state.username}
             onChange={this.changeHandler}
           />
           <input
@@ -37,10 +37,7 @@ class Login extends Component {
   // changeHandler for the user typing
   changeHandler = event => {
     event.preventDefault();
-    this.setState(previousState => ({
-      ...previousState,
-      [event.target.name]: event.target.value
-    }));
+    this.setState({ [event.target.name]: event.target.value });
   };
   // loginHandler for the Login button
   loginHandler = event => {

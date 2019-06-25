@@ -24,7 +24,7 @@ const initialState = {
   updating: false
 };
 // creating rootReducer fn. takes in a state object, action object, and returns a new state depending on the type property within the action object
-const rootReducer = (state = initialState, action) => {
+export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_START:
       return {

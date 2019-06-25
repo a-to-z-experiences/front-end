@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 // importing rootReducer so our store variable that we pass to Provider as props can use the reducer's returned state
-import rootReducer from "./reducers/index";
+import rootReducer from "./Reducers/index";
 // importing createStore so we can create our global store, applyMiddleware is a method so we can use loggers and thunks, compose so we can use the redux tools
 import { createStore, applyMiddleware, compose } from "redux";
 // importing Provider so we can pass our store prop into it that'll give our inner components access to it

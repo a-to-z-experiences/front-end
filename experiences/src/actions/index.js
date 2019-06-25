@@ -14,6 +14,7 @@ export const REGISTER_FAILURE = "REGISTER_FAILURE";
 export const GET_USER_DATA_START = "GET_USER_DATA_START";
 export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_FAILURE = "GET_USER_DATA_FAILURE";
+
 // creating getExperiencesData variables for action types
 export const GET_EXPERIENCES_DATA_START = "GET_EXPERIENCES_DATA_START";
 export const GET_EXPERIENCES_DATA_SUCCESS = "GET_EXPERIENCES_DATA_SUCCESS";
@@ -57,20 +58,37 @@ export const register = () => dispatch => {
     });
 };
 
-// creating getUserData action creator
-export const getUserData = () => dispatch => {};
+// creating getUserData action creator, takes in ID of user
+export const getUserData = id => dispatch => {
+  dispatch({ type: GET_USER_DATA_START });
+  // interpolating ID value because it's a number, and the URL we get from has to use a string value
+  axios
+    .get(`https://atoz.herokuapp.com/users/${id}`)
+    .then(response => {
+      console.log("GET_USER_DATA_SUCCESS: ", response);
+      dispatch({ type: GET_USER_DATA_START, payload: response.data });
+    })
+    .catch(error => {
+      console.log("GET_USER_DATA_FAILURE: ", error);
+      dispatch({ type: GET_USER_DATA_FAILURE, payload: error.message });
+    });
+};
 
 // creating getExperiencesData action creator
 export const getExperiencesData = () => dispatch => {
   dispatch({ type: GET_EXPERIENCES_DATA_START });
-  axios.get("https://atoz.herokuapp.com/experiences").then(response => {
-    console.log("GET_EXPERIENCES_DATA_SUCCESS: ", response);
-    dispatch({
-      type: GET_EXPERIENCES_DATA_SUCCESS,
-      payload: response.experiences
-    }).catch(error => {
+  // get call to /experiences endpoint
+  axios
+    .get("https://atoz.herokuapp.com/experiences")
+    .then(response => {
+      console.log("GET_EXPERIENCES_DATA_SUCCESS: ", response);
+      dispatch({
+        type: GET_EXPERIENCES_DATA_SUCCESS,
+        payload: response.experiences
+      });
+    })
+    .catch(error => {
       console.log("GET_EXPERIENCES_FAILURE_ERROR: ", error);
       dispatch({ type: GET_EXPERIENCES_DATA_FAILURE, payload: error.message });
     });
-  });
 };

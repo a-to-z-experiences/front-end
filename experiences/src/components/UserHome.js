@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 class UserHome extends Component {
   render() {
     return (
-      <div className="user-home">
-        USER HOME
+        <div className="user-home">
+        <div className="user-home-title">USER HOME</div>
         <div className="upcoming-experiences">UPCOMING EXPERIENCES</div>
       </div>
     );

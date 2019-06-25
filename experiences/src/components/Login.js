@@ -12,7 +12,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <header>Sign up/Login</header>
+        <div className="register-login-title">Register/Login</div>
         {this.props.error && <div>{this.props.error}</div>}
         <form>
           <input
@@ -37,9 +37,10 @@ class Login extends Component {
   // changeHandler for the user typing
   changeHandler = event => {
     event.preventDefault();
-    this.setState({
+    this.setState(previousState => ({
+      ...previousState,
       [event.target.name]: event.target.value
-    });
+    }));
   };
   // loginHandler for the Login button
   loginHandler = event => {

@@ -10,7 +10,7 @@ class AvailableExperiences extends Component {
     getExperiencesData();
   }
   render() {
-    return <div className="available-experiences" />;
+    return <div className="available-experiences">AVAILABLE EXPERIENCES</div>;
   }
 }
 

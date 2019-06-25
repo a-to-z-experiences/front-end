@@ -25,12 +25,12 @@ export const login = () => dispatch => {
   axios
     .post("https://atoz.herokuapp.com/login")
     .then(response => {
-      console.log("RESPONSE: ", response);
+      console.log("LOGIN_SUCCESS_RESPONSE: ", response);
       localStorage.setItem("token", response.data.token);
       dispatch({ type: LOGIN_SUCCESS });
     })
     .catch(error => {
-      console.log("ERROR: ", error);
+      console.log("LOGIN_FAILURE_RROR: ", error);
       dispatch({
         type: LOGIN_FAILURE,
         payload: "Email or Password is incorrect"
@@ -44,12 +44,12 @@ export const register = () => dispatch => {
   axios
     .post("https://atoz.herokuapp.com/register") // or /users?
     .then(response => {
-      console.log("RESPONSE: ", response);
+      console.log("REGISTER_SUCCESS_RESPONSE: ", response);
       localStorage.setItem("token", response.data.token);
       dispatch({ type: REGISTER_SUCCESS });
     })
     .catch(error => {
-      console.log("ERROR: ", error);
+      console.log("REGISTER_FAILURE_ERROR: ", error);
       dispatch({
         type: REGISTER_FAILURE,
         payload: "Email or Password is taken or invalid"
@@ -61,4 +61,16 @@ export const register = () => dispatch => {
 export const getUserData = () => dispatch => {};
 
 // creating getExperiencesData action creator
-export const getExperiencesData = () => dispatch => {};
+export const getExperiencesData = () => dispatch => {
+  dispatch({ type: GET_EXPERIENCES_DATA_START });
+  axios.get("https://atoz.herokuapp.com/experiences").then(response => {
+    console.log("GET_EXPERIENCES_DATA_SUCCESS: ", response);
+    dispatch({
+      type: GET_EXPERIENCES_DATA_SUCCESS,
+      payload: response.experiences
+    }).catch(error => {
+      console.log("GET_EXPERIENCES_FAILURE_ERROR: ", error);
+      dispatch({ type: GET_EXPERIENCES_DATA_FAILURE, payload: error.message });
+    });
+  });
+};

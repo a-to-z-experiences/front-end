@@ -105,7 +105,7 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         gettingExperiencesData: false,
         error: "",
-        availableExperiencesArray: action.allExperiences,
+        allExperiencesArray: action.allExperiencesArray,
         message: ""
       };
     case GET_ALL_EXPERIENCES_DATA_FAILURE:

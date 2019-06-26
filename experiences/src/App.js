@@ -10,6 +10,8 @@ import UserHome from "./components/UserHome";
 import Login from "./components/Login";
 // importing AllExperiences which contain all the experiences inside the data.experiences array
 import AllExperiences from "./components/AllExperiences";
+// importing specificExperience which is the component that shows when you click on an experiencediv within allexperiences
+import SpecificExperience from "./components/SpecificExperience";
 // css file at end
 import "./App.css";
 
@@ -19,6 +21,10 @@ function App() {
       <Route path="/login" component={Login} />
       <PrivateRoute exact path="/" component={UserHome} />
       <Route path="/all-experiences" component={AllExperiences} />
+      <Route
+        path="/experiences/:experiencesId"
+        component={SpecificExperience}
+      />
     </div>
   );
 }

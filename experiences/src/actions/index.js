@@ -99,7 +99,7 @@ export const getUserData = id => dispatch => {
   dispatch({ type: GET_USER_DATA_START });
   // interpolating ID value because it's a number, and the URL we get from has to use a string value
   axios
-    .get(`https://atoz-backend.herokuapp.com/users/${id}`)
+    .get(`https://atoz-backend.herokuapp.com/api/users/${id}`)
     .then(response => {
       console.log("GET_USER_DATA_SUCCESS: ", response);
       dispatch({ type: GET_USER_DATA_START, userData: response.data });
@@ -115,12 +115,12 @@ export const getAllExperiencesData = () => dispatch => {
   dispatch({ type: GET_ALL_EXPERIENCES_DATA_START });
   // get call to /experiences endpoint
   axios
-    .get("https://atoz-backend.herokuapp.com/experiences")
+    .get("https://atoz-backend.herokuapp.com/api/experiences")
     .then(response => {
       console.log("GET_ALL_EXPERIENCES_DATA_SUCCESS: ", response);
       dispatch({
         type: GET_ALL_EXPERIENCES_DATA_SUCCESS,
-        allExperiences: response.experiences
+        allExperiencesArray: response.data.experiences
       });
     })
     .catch(error => {
@@ -137,7 +137,7 @@ export const getSpecificExperience = experienceID => dispatch => {
   dispatch({ type: GET_SPECIFIC_EXPERIENCE_DATA_START });
   // get call to /experiences endpoint
   axios
-    .get(`https://atoz-backend.herokuapp.com/experiences/${experienceID}`)
+    .get(`https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`)
     .then(response => {
       console.log("GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
@@ -159,7 +159,7 @@ export const updateSpecificExperience = experienceID => dispatch => {
   dispatch({ type: UPDATE_SPECIFIC_EXPERIENCE_DATA_START });
   // get call to /experiences endpoint
   axios
-    .put(`https://atoz-backend.herokuapp.com/experiences/${experienceID}`)
+    .put(`https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`)
     .then(response => {
       console.log("UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
@@ -182,7 +182,7 @@ export const deleteSpecificExperience = experienceID => dispatch => {
   dispatch({ type: DELETE_SPECIFIC_EXPERIENCE_DATA_START });
   // get call to /experiences endpoint
   axios
-    .delete(`https://atoz-backend.herokuapp.com/experiences/${experienceID}`)
+    .delete(`https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`)
     .then(response => {
       console.log("DELETE_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
@@ -205,7 +205,7 @@ export const addNewExperience = newExperienceObject => dispatch => {
   dispatch({ type: ADD_NEW_EXPERIENCE_DATA_START });
   // get call to /experiences endpoint
   axios
-    .post("https://atoz-backend.herokuapp.com/experiences", newExperienceObject)
+    .post("https://atoz-backend.herokuapp.com/api/experiences", newExperienceObject)
     .then(response => {
       console.log("ADD_NEW_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({

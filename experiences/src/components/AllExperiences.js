@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import getExperiencesData fn to allow us to match events with action objects that change the reducer's state that changes what we receive as props
-import { getAllExperiencesData, addNewExperience } from "../actions";
+import { getAllExperiencesData, postNewExperience } from "../actions";
 // import link so you can link the divs to their individual ID pages,
 import { Link } from "react-router-dom";
 // import connect to connect the action creators and props we want from reducer's state to component
@@ -21,7 +21,7 @@ class AllExperiences extends Component {
   render() {
     return (
       <div className="all-experiences">
-        <form onSubmit={this.addNewExperienceHandler}>
+        <form onSubmit={this.postNewExperienceHandler}>
           <input
             name="title"
             value={this.state.newExperience.title}
@@ -46,7 +46,7 @@ class AllExperiences extends Component {
             placeholder="price"
             onChange={this.changeHandler}
           />
-          <button>Add an Experience</button>
+          <button>post an Experience</button>
         </form>
         <div className="all-experiences-title">ALL EXPERIENCES</div>
         {this.props.allExperiencesArray.map(experienceObject => (
@@ -58,7 +58,7 @@ class AllExperiences extends Component {
               <div className="title">{experienceObject.title}</div>
               <div className="title">{experienceObject.dates}</div>
               <div className="title">{experienceObject.location}</div>
-              <button>Add Experience</button>
+              <button>Post New Experience</button>
               <button>Delete Experience</button>
             </div>
           </Link>
@@ -76,9 +76,9 @@ class AllExperiences extends Component {
       }
     });
   };
-  addNewExperienceHandler = event => {
+  postNewExperienceHandler = event => {
     event.preventDefault();
-    this.props.addNewExperience(this.state.newExperience);
+    this.props.postNewExperience(this.state.newExperience);
     this.setState({
       ...this.state,
       newExperience: {
@@ -102,5 +102,5 @@ const mapStateToProps = state => {
 // linking mapStateToProps, action creators to Login component
 export default connect(
   mapStateToProps,
-  { getAllExperiencesData, addNewExperience }
+  { getAllExperiencesData, postNewExperience }
 )(AllExperiences);

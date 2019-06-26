@@ -22,12 +22,12 @@ export const GET_ALL_EXPERIENCES_DATA_SUCCESS =
 export const GET_ALL_EXPERIENCES_DATA_FAILURE =
   "GET_ALL_EXPERIENCES_DATA_FAILURE";
 
-// creating ADD_NEW_EXPERIENCES variables for action types
-export const ADD_NEW_EXPERIENCE_DATA_START = "ADD_NEW_EXPERIENCE_DATA_START";
-export const ADD_NEW_EXPERIENCE_DATA_SUCCESS =
-  "ADD_NEW_EXPERIENCE_DATA_SUCCESS";
-export const ADD_NEW_EXPERIENCE_DATA_FAILURE =
-  "ADD_NEW_EXPERIENCE_DATA_FAILURE";
+// creating POST_NEW_EXPERIENCES variables for action types
+export const POST_NEW_EXPERIENCE_DATA_START = "POST_NEW_EXPERIENCE_DATA_START";
+export const POST_NEW_EXPERIENCE_DATA_SUCCESS =
+  "POST_NEW_EXPERIENCE_DATA_SUCCESS";
+export const POST_NEW_EXPERIENCE_DATA_FAILURE =
+  "POST_NEW_EXPERIENCE_DATA_FAILURE";
 
 // creating GET_SPECIFIC_EXPERIENCES variables for action types
 export const GET_SPECIFIC_EXPERIENCE_DATA_START =
@@ -132,9 +132,9 @@ export const getAllExperiencesData = () => dispatch => {
     });
 };
 
-// creating addNewExperience action creator
-export const addNewExperience = newExperienceObject => dispatch => {
-  dispatch({ type: ADD_NEW_EXPERIENCE_DATA_START });
+// creating POSTNewExperience action creator
+export const postNewExperience = newExperienceObject => dispatch => {
+  dispatch({ type: POST_NEW_EXPERIENCE_DATA_START });
   // post call to /experiences endpoint
   axios
     .post(
@@ -142,17 +142,17 @@ export const addNewExperience = newExperienceObject => dispatch => {
       newExperienceObject
     )
     .then(response => {
-      console.log("ADD_NEW_EXPERIENCE_DATA_SUCCESS: ", response);
+      console.log("POST_NEW_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
-        type: ADD_NEW_EXPERIENCE_DATA_SUCCESS,
+        type: POST_NEW_EXPERIENCE_DATA_SUCCESS,
         updatedExperiences: response.experiences,
         message: response.message,
       });
     })
     .catch(error => {
-      console.log("ADD_NEW_EXPERIENCE_FAILURE_ERROR: ", error);
+      console.log("POST_NEW_EXPERIENCE_FAILURE_ERROR: ", error);
       dispatch({
-        type: ADD_NEW_EXPERIENCE_DATA_FAILURE,
+        type: POST_NEW_EXPERIENCE_DATA_FAILURE,
         error: error.message
       });
     });

@@ -12,9 +12,9 @@ import {
   GET_ALL_EXPERIENCES_DATA_START,
   GET_ALL_EXPERIENCES_DATA_SUCCESS,
   GET_ALL_EXPERIENCES_DATA_FAILURE,
-  ADD_NEW_EXPERIENCE_DATA_START,
-  ADD_NEW_EXPERIENCE_DATA_SUCCESS,
-  ADD_NEW_EXPERIENCE_DATA_FAILURE,
+  POST_NEW_EXPERIENCE_DATA_START,
+  POST_NEW_EXPERIENCE_DATA_SUCCESS,
+  POST_NEW_EXPERIENCE_DATA_FAILURE,
   GET_SPECIFIC_EXPERIENCE_DATA_START,
   GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
   GET_SPECIFIC_EXPERIENCE_DATA_FAILURE,
@@ -31,7 +31,7 @@ const initialState = {
   registering: false,
   gettingUserData: false,
   gettingExperiencesData: false,
-  addingNewExperienceData: false,
+  postingNewExperienceData: false,
   gettingSpecificExperienceData: false,
   userData: {},
   userId: -1,
@@ -131,25 +131,25 @@ export const rootReducer = (state = initialState, action) => {
         error: action.error,
         message: ""
       };
-    case ADD_NEW_EXPERIENCE_DATA_START:
+    case POST_NEW_EXPERIENCE_DATA_START:
       return {
         ...state,
-        addingNewExperienceData: true,
+        postingNewExperienceData: true,
         error: "",
         message: action.message
       };
-    case ADD_NEW_EXPERIENCE_DATA_SUCCESS:
+    case POST_NEW_EXPERIENCE_DATA_SUCCESS:
       return {
         ...state,
-        addingNewExperienceData: false,
+        postingNewExperienceData: false,
         error: "",
         message: "",
         userExperiences: action.updatedExperiences
       };
-    case ADD_NEW_EXPERIENCE_DATA_FAILURE:
+    case POST_NEW_EXPERIENCE_DATA_FAILURE:
       return {
         ...state,
-        addingNewExperienceData: true,
+        postingNewExperienceData: true,
         error: action.error,
         message: ""
       };

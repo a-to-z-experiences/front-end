@@ -59,13 +59,13 @@ export const login = credentials => dispatch => {
     .then(response => {
       console.log("LOGIN_SUCCESS_RESPONSE: ", response);
       localStorage.setItem("token", response.data.token);
-      dispatch({ type: LOGIN_SUCCESS, payload: response.data.message });
+      dispatch({ type: LOGIN_SUCCESS, message: response.data.message, userData: response.data.user });
     })
     .catch(error => {
       console.log("LOGIN_FAILURE_ERROR: ", error);
       dispatch({
         type: LOGIN_FAILURE,
-        payload: "Username or Password is incorrect"
+        error: "Username or Password is incorrect"
       });
     });
 };
@@ -77,13 +77,13 @@ export const register = credentials => dispatch => {
     .post("https://atoz-backend.herokuapp.com/api/register", credentials) // or /users?
     .then(response => {
       console.log("REGISTER_SUCCESS_RESPONSE: ", response);
-      dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
+      dispatch({ type: REGISTER_SUCCESS, message: response.data.message });
     })
     .catch(error => {
       console.log("REGISTER_FAILURE_ERROR: ", error);
       dispatch({
         type: REGISTER_FAILURE,
-        payload: "Email or Password is taken or invalid"
+        error: "Email or Password is taken or invalid"
       });
     });
 };
@@ -96,11 +96,11 @@ export const getUserData = id => dispatch => {
     .get(`https://atoz-backend.herokuapp.com/users/${id}`)
     .then(response => {
       console.log("GET_USER_DATA_SUCCESS: ", response);
-      dispatch({ type: GET_USER_DATA_START, payload: response.data });
+      dispatch({ type: GET_USER_DATA_START, userData: response.data });
     })
     .catch(error => {
       console.log("GET_USER_DATA_FAILURE: ", error);
-      dispatch({ type: GET_USER_DATA_FAILURE, payload: error.message });
+      dispatch({ type: GET_USER_DATA_FAILURE, error: error.message });
     });
 };
 
@@ -114,12 +114,12 @@ export const getExperiencesData = () => dispatch => {
       console.log("GET_EXPERIENCES_DATA_SUCCESS: ", response);
       dispatch({
         type: GET_EXPERIENCES_DATA_SUCCESS,
-        payload: response.experiences
+        allExperiences: response.experiences
       });
     })
     .catch(error => {
       console.log("GET_EXPERIENCES_FAILURE_ERROR: ", error);
-      dispatch({ type: GET_EXPERIENCES_DATA_FAILURE, payload: error.message });
+      dispatch({ type: GET_EXPERIENCES_DATA_FAILURE, error: error.message });
     });
 };
 
@@ -133,14 +133,14 @@ export const getSpecificExperience = experienceID => dispatch => {
       console.log("GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
         type: GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
-        payload: response.experiences
+        specificExperience: response.experiences
       });
     })
     .catch(error => {
       console.log("GET_SPECIFIC_EXPERIENCE_FAILURE_ERROR: ", error);
       dispatch({
         type: GET_SPECIFIC_EXPERIENCE_DATA_FAILURE,
-        payload: error.message
+        error: error.message
       });
     });
 };
@@ -155,14 +155,15 @@ export const updateSpecificExperience = experienceID => dispatch => {
       console.log("UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
         type: UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
-        payload: response.experiences
+        // i think you get all the updatedExperiences back
+        updatedExperiences: response.experiences
       });
     })
     .catch(error => {
       console.log("UPDATE_SPECIFIC_EXPERIENCE_FAILURE_ERROR: ", error);
       dispatch({
         type: UPDATE_SPECIFIC_EXPERIENCE_DATA_FAILURE,
-        payload: error.message
+        error: error.message
       });
     });
 };
@@ -177,14 +178,15 @@ export const deleteSpecificExperience = experienceID => dispatch => {
       console.log("DELETE_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
         type: DELETE_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
-        payload: response.experiences
+        // I think you get the updated experiences array back
+        updatedExperiences: response.experiences
       });
     })
     .catch(error => {
       console.log("DELETE_SPECIFIC_EXPERIENCE_FAILURE_ERROR: ", error);
       dispatch({
         type: DELETE_SPECIFIC_EXPERIENCE_DATA_FAILURE,
-        payload: error.message
+        error: error.message
       });
     });
 };
@@ -199,14 +201,14 @@ export const addNewExperience = newExperienceObject => dispatch => {
       console.log("ADD_NEW_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
         type: ADD_NEW_EXPERIENCE_DATA_SUCCESS,
-        payload: response.experiences
+        updatedExperiences: response.experiences
       });
     })
     .catch(error => {
       console.log("ADD_NEW_EXPERIENCE_FAILURE_ERROR: ", error);
       dispatch({
         type: ADD_NEW_EXPERIENCE_DATA_FAILURE,
-        payload: error.message
+        error: error.message
       });
     });
 };

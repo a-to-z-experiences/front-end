@@ -16,9 +16,11 @@ export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_FAILURE = "GET_USER_DATA_FAILURE";
 
 // creating getExperiencesData variables for action types
-export const GET_EXPERIENCES_DATA_START = "GET_EXPERIENCES_DATA_START";
-export const GET_EXPERIENCES_DATA_SUCCESS = "GET_EXPERIENCES_DATA_SUCCESS";
-export const GET_EXPERIENCES_DATA_FAILURE = "GET_EXPERIENCES_DATA_FAILURE";
+export const GET_ALL_EXPERIENCES_DATA_START = "GET_ALL_EXPERIENCES_DATA_START";
+export const GET_ALL_EXPERIENCES_DATA_SUCCESS =
+  "GET_ALL_EXPERIENCES_DATA_SUCCESS";
+export const GET_ALL_EXPERIENCES_DATA_FAILURE =
+  "GET_ALL_EXPERIENCES_DATA_FAILURE";
 
 // creating ADD_NEW_EXPERIENCES variables for action types
 export const ADD_NEW_EXPERIENCE_DATA_START = "ADD_NEW_EXPERIENCE_DATA_START";
@@ -59,7 +61,11 @@ export const login = credentials => dispatch => {
     .then(response => {
       console.log("LOGIN_SUCCESS_RESPONSE: ", response);
       localStorage.setItem("token", response.data.token);
-      dispatch({ type: LOGIN_SUCCESS, message: response.data.message, userData: response.data.user });
+      dispatch({
+        type: LOGIN_SUCCESS,
+        message: response.data.message,
+        userData: response.data.user
+      });
     })
     .catch(error => {
       console.log("LOGIN_FAILURE_ERROR: ", error);
@@ -105,21 +111,24 @@ export const getUserData = id => dispatch => {
 };
 
 // creating getExperiencesData action creator
-export const getExperiencesData = () => dispatch => {
-  dispatch({ type: GET_EXPERIENCES_DATA_START });
+export const getAllExperiencesData = () => dispatch => {
+  dispatch({ type: GET_ALL_EXPERIENCES_DATA_START });
   // get call to /experiences endpoint
   axios
     .get("https://atoz-backend.herokuapp.com/experiences")
     .then(response => {
-      console.log("GET_EXPERIENCES_DATA_SUCCESS: ", response);
+      console.log("GET_ALL_EXPERIENCES_DATA_SUCCESS: ", response);
       dispatch({
-        type: GET_EXPERIENCES_DATA_SUCCESS,
+        type: GET_ALL_EXPERIENCES_DATA_SUCCESS,
         allExperiences: response.experiences
       });
     })
     .catch(error => {
-      console.log("GET_EXPERIENCES_FAILURE_ERROR: ", error);
-      dispatch({ type: GET_EXPERIENCES_DATA_FAILURE, error: error.message });
+      console.log("GET_ALL_EXPERIENCES_FAILURE_ERROR: ", error);
+      dispatch({
+        type: GET_ALL_EXPERIENCES_DATA_FAILURE,
+        error: error.message
+      });
     });
 };
 

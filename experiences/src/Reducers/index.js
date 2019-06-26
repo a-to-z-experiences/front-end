@@ -9,9 +9,9 @@ import {
   GET_USER_DATA_START,
   GET_USER_DATA_SUCCESS,
   GET_USER_DATA_FAILURE,
-  GET_EXPERIENCES_DATA_START,
-  GET_EXPERIENCES_DATA_SUCCESS,
-  GET_EXPERIENCES_DATA_FAILURE
+  GET_ALL_EXPERIENCES_DATA_START,
+  GET_ALL_EXPERIENCES_DATA_SUCCESS,
+  GET_ALL_EXPERIENCES_DATA_FAILURE
 } from "../actions";
 // creating initialState variable, set to an object
 const initialState = {
@@ -20,7 +20,8 @@ const initialState = {
   gettingUserData: false,
   gettingExperiencesData: false,
   userData: {},
-  availableExperiencesArray: [],
+  userId: -1,
+  allExperiencesArray: [],
   updating: false,
   message: ""
 };
@@ -40,7 +41,8 @@ export const rootReducer = (state = initialState, action) => {
         loggingIn: false,
         error: "",
         message: action.message,
-        userData: action.userData
+        userData: action.userData,
+        userId: action.userData.id
       };
     case LOGIN_FAILURE:
       return {
@@ -91,14 +93,14 @@ export const rootReducer = (state = initialState, action) => {
         error: action.error,
         message: ""
       };
-    case GET_EXPERIENCES_DATA_START:
+    case GET_ALL_EXPERIENCES_DATA_START:
       return {
         ...state,
         gettingExperiencesData: true,
         error: "",
         message: ""
       };
-    case GET_EXPERIENCES_DATA_SUCCESS:
+    case GET_ALL_EXPERIENCES_DATA_SUCCESS:
       return {
         ...state,
         gettingExperiencesData: false,
@@ -106,7 +108,7 @@ export const rootReducer = (state = initialState, action) => {
         availableExperiencesArray: action.allExperiences,
         message: ""
       };
-    case GET_EXPERIENCES_DATA_FAILURE:
+    case GET_ALL_EXPERIENCES_DATA_FAILURE:
       return {
         ...state,
         gettingExperiencesData: false,

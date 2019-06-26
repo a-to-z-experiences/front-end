@@ -24,11 +24,12 @@ export const GET_USER_EXPERIENCES_DATA_FAILURE =
   "GET_USER_EXPERIENCES_DATA_FAILURE";
 
 // creating getExperiencesData variables for action types
-export const GET_ALL_EXPERIENCES_DATA_START = "GET_ALL_EXPERIENCES_DATA_START";
-export const GET_ALL_EXPERIENCES_DATA_SUCCESS =
-  "GET_ALL_EXPERIENCES_DATA_SUCCESS";
-export const GET_ALL_EXPERIENCES_DATA_FAILURE =
-  "GET_ALL_EXPERIENCES_DATA_FAILURE";
+export const GET_AVAILABLE_EXPERIENCES_DATA_START =
+  "GET_AVAILABLE_EXPERIENCES_DATA_START";
+export const GET_AVAILABLE_EXPERIENCES_DATA_SUCCESS =
+  "GET_AVAILABLE_EXPERIENCES_DATA_SUCCESS";
+export const GET_AVAILABLE_EXPERIENCES_DATA_FAILURE =
+  "GET_AVAILABLE_EXPERIENCES_DATA_FAILURE";
 
 // creating POST_NEW_EXPERIENCES variables for action types
 export const POST_NEW_EXPERIENCE_DATA_START = "POST_NEW_EXPERIENCE_DATA_START";
@@ -110,7 +111,11 @@ export const getUserData = id => dispatch => {
     .get(`https://atoz-backend.herokuapp.com/api/users/${id}`)
     .then(response => {
       console.log("GET_USER_DATA_SUCCESS: ", response);
-      dispatch({ type: GET_USER_DATA_START, userDataObject: response.data, userExperiencesArray: response.data.experiences });
+      dispatch({
+        type: GET_USER_DATA_START,
+        userDataObject: response.data,
+        userExperiencesArray: response.data.experiences
+      });
     })
     .catch(error => {
       console.log("GET_USER_DATA_FAILURE: ", error);
@@ -140,23 +145,23 @@ export const getUserExperiencesData = id => dispatch => {
     });
 };
 
-// creating getALLExperiencesData action creator
-export const getAllExperiencesData = () => dispatch => {
-  dispatch({ type: GET_ALL_EXPERIENCES_DATA_START });
-  // get call to /experiences endpoint
+// creating getAVAILABLEExperiencesData action creator
+export const getAvailableExperiencesData = () => dispatch => {
+  dispatch({ type: GET_AVAILABLE_EXPERIENCES_DATA_START });
+  // get cAVAILABLE to /experiences endpoint
   axios
     .get("https://atoz-backend.herokuapp.com/api/experiences")
     .then(response => {
-      console.log("GET_ALL_EXPERIENCES_DATA_SUCCESS: ", response);
+      console.log("GET_AVAILABLE_EXPERIENCES_DATA_SUCCESS: ", response);
       dispatch({
-        type: GET_ALL_EXPERIENCES_DATA_SUCCESS,
-        allExperiencesArray: response.data.experiences
+        type: GET_AVAILABLE_EXPERIENCES_DATA_SUCCESS,
+        availableExperiencesArray: response.data.experiences
       });
     })
     .catch(error => {
-      console.log("GET_ALL_EXPERIENCES_FAILURE_ERROR: ", error);
+      console.log("GET_AVAILABLE_EXPERIENCES_FAILURE_ERROR: ", error);
       dispatch({
-        type: GET_ALL_EXPERIENCES_DATA_FAILURE,
+        type: GET_AVAILABLE_EXPERIENCES_DATA_FAILURE,
         error: error.message
       });
     });
@@ -165,7 +170,7 @@ export const getAllExperiencesData = () => dispatch => {
 // creating POSTNewExperience action creator
 export const postNewExperience = newExperienceObject => dispatch => {
   dispatch({ type: POST_NEW_EXPERIENCE_DATA_START });
-  // post call to /experiences endpoint
+  // post cAVAILABLE to /experiences endpoint
   axios
     .post(
       "https://atoz-backend.herokuapp.com/api/experiences",
@@ -191,7 +196,7 @@ export const postNewExperience = newExperienceObject => dispatch => {
 // creating getSpecificExperience action creator
 export const getSpecificExperience = experienceID => dispatch => {
   dispatch({ type: GET_SPECIFIC_EXPERIENCE_DATA_START });
-  // get call to /experiences endpoint
+  // get cAVAILABLE to /experiences endpoint
   axios
     .get(`https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`)
     .then(response => {
@@ -213,15 +218,16 @@ export const getSpecificExperience = experienceID => dispatch => {
 // creating updateSpecificExperience action creator
 export const updateSpecificExperience = experienceID => dispatch => {
   dispatch({ type: UPDATE_SPECIFIC_EXPERIENCE_DATA_START });
-  // get call to /experiences endpoint
+  // get cAVAILABLE to /experiences endpoint
   axios
     .put(`https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`)
     .then(response => {
       console.log("UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
         type: UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
-        // i think you get all the updatedExperiences back
-        updatedExperiences: response.experiences
+        // i think you get AVAILABLE the updatedExperiences back
+        updatedExperiences: response.experiences, 
+        message: response.message
       });
     })
     .catch(error => {
@@ -236,7 +242,7 @@ export const updateSpecificExperience = experienceID => dispatch => {
 // creating deleteSpecificExperience action creator
 export const deleteSpecificExperience = experienceID => dispatch => {
   dispatch({ type: DELETE_SPECIFIC_EXPERIENCE_DATA_START });
-  // get call to /experiences endpoint
+  // get cAVAILABLE to /experiences endpoint
   axios
     .delete(
       `https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`

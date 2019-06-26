@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 // import connect to connect the action creators and props we want from reducer's state to component
+// importing link so I can link stuff
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 // import login and register action creators
 import { login, register } from "../actions";
@@ -39,6 +41,11 @@ class Login extends Component {
           <button onClick={this.loginHandler}>Login</button>
           <button onClick={this.registerHandler}>Register</button>
         </form>
+        <Link to="/available-experiences">
+          <div className="available-experiences-title">
+            View Available Experiences
+          </div>
+        </Link>
       </div>
     );
   }

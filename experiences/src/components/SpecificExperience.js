@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// importing link so I can link stuff
+import { Link } from "react-router-dom";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
 import { getSpecificExperience } from "../actions";
@@ -11,28 +13,46 @@ class SpecificExperience extends Component {
   }
   render() {
     return (
-      <div className="specific-experience">
-        <div className="specific-experience-title">
-          {this.props.specificExperienceObject.title}
+      <div class="specific-experience-wrapper">
+        <Link to="/">
+          <div className="user-home-title">Home</div>
+        </Link>
+        <Link to="/available-experiences">
+          <div className="available-experiences-title">
+            View Available Experiences
+          </div>
+        </Link>
+        <Link to="/hosted-experiences">
+          <div className="hosted-experiences-title">
+            View My Posted Experiences
+          </div>
+        </Link>
+        <div className="specific-experience">
+          <div className="specific-experience-title">
+            {this.props.specificExperienceObject.title}
+          </div>
+          <div className="specific-experience-description">
+            {this.props.specificExperienceObject.description}
+          </div>
+          <div className="specific-experience-dates">
+            {this.props.specificExperienceObject.dates}
+          </div>
+          <div className="specific-experience-location">
+            {this.props.specificExperienceObject.location}
+          </div>
+          <div className="specific-experience-price">
+            {this.props.specificExperienceObject.price}
+          </div>
+          <button>RSVP</button>
+          <button onClick={this.goBack}>Back</button>
         </div>
-        <div className="specific-experience-description">
-          {this.props.specificExperienceObject.description}
-        </div>
-        <div className="specific-experience-dates">
-          {this.props.specificExperienceObject.dates}
-        </div>
-        <div className="specific-experience-location">
-          {this.props.specificExperienceObject.location}
-        </div>
-        <div className="specific-experience-price">
-          {this.props.specificExperienceObject.price}
-        </div>
-        <button>Add Experience</button>
-        <button>Update Experience</button>
-        <button>Remove Experience</button>
       </div>
     );
   }
+  goBack = event => {
+    event.preventDefault();
+    this.props.history.push("/available-experiences");
+  };
 }
 
 // creating mapStateToProps fn that takes in state from reducers. We pass props to SpecificExperience by utilizing the reducer's state

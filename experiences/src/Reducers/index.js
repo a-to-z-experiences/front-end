@@ -12,9 +12,9 @@ import {
   GET_USER_EXPERIENCES_DATA_START,
   GET_USER_EXPERIENCES_DATA_SUCCESS,
   GET_USER_EXPERIENCES_DATA_FAILURE,
-  GET_ALL_EXPERIENCES_DATA_START,
-  GET_ALL_EXPERIENCES_DATA_SUCCESS,
-  GET_ALL_EXPERIENCES_DATA_FAILURE,
+  GET_AVAILABLE_EXPERIENCES_DATA_START,
+  GET_AVAILABLE_EXPERIENCES_DATA_SUCCESS,
+  GET_AVAILABLE_EXPERIENCES_DATA_FAILURE,
   POST_NEW_EXPERIENCE_DATA_START,
   POST_NEW_EXPERIENCE_DATA_SUCCESS,
   POST_NEW_EXPERIENCE_DATA_FAILURE,
@@ -37,10 +37,12 @@ const initialState = {
   gettingExperiencesData: false,
   postingNewExperienceData: false,
   gettingSpecificExperienceData: false,
+  updatingSpecificExperienceData: false,
+  deletingSpecificExperienceData: false,
   userData: {},
   userExperiences: [],
   userId: -1,
-  allExperiencesArray: [],
+  availableExperiencesArray: [],
   specificExperienceObject: {},
   specificExperienceId: -1,
   updating: false,
@@ -121,16 +123,16 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         gettingUserExperiencesData: true,
         error: "",
-        message: ''
-      }
-    case GET_USER_EXPERIENCES_DATA_SUCCESS: 
+        message: ""
+      };
+    case GET_USER_EXPERIENCES_DATA_SUCCESS:
       return {
         ...state,
         gettingUserExperiencesData: false,
-        error: "", 
+        error: "",
         message: "",
-        userExperiencesDataArray: action.payload,
-      }
+        userExperiencesDataArray: action.payload
+      };
     case GET_USER_EXPERIENCES_DATA_FAILURE:
       return {
         ...state,
@@ -139,22 +141,23 @@ export const rootReducer = (state = initialState, action) => {
         message: "",
         userExperiencesDataArray: action.payload
       };
-    case GET_ALL_EXPERIENCES_DATA_START:
+    case GET_AVAILABLE_EXPERIENCES_DATA_START:
       return {
         ...state,
         gettingExperiencesData: true,
         error: "",
-        message: ""
+        message: "",
+        specificExperienceObject: {}
       };
-    case GET_ALL_EXPERIENCES_DATA_SUCCESS:
+    case GET_AVAILABLE_EXPERIENCES_DATA_SUCCESS:
       return {
         ...state,
         gettingExperiencesData: false,
         error: "",
         message: "",
-        allExperiencesArray: action.allExperiencesArray
+        availableExperiencesArray: action.availableExperiencesArray
       };
-    case GET_ALL_EXPERIENCES_DATA_FAILURE:
+    case GET_AVAILABLE_EXPERIENCES_DATA_FAILURE:
       return {
         ...state,
         gettingExperiencesData: false,
@@ -205,6 +208,50 @@ export const rootReducer = (state = initialState, action) => {
         gettingSpecificExperienceData: true,
         error: action.error,
         message: ""
+      };
+    case UPDATE_SPECIFIC_EXPERIENCE_DATA_START:
+      return {
+        ...state,
+        error: "",
+        message: "",
+        updatingSpecificExperienceData: true
+      };
+    case UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS:
+      return {
+        ...state,
+        error: "",
+        message: action.message,
+        updatingSpecificExperienceData: false,
+        userExperiences: action.updatedExperiences
+      };
+    case UPDATE_SPECIFIC_EXPERIENCE_DATA_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        message: "",
+        updatingSpecificExperienceData: false
+      };
+    case DELETE_SPECIFIC_EXPERIENCE_DATA_START:
+      return {
+        ...state,
+        error: "",
+        message: "",
+        deletingSpecificExperienceData: true
+      };
+    case DELETE_SPECIFIC_EXPERIENCE_DATA_SUCCESS:
+      return {
+        ...state,
+        error: "",
+        message: action.message,
+        deletingSpecificExperienceData: false,
+        userExperiences: action.updatedExperiences
+      };
+    case DELETE_SPECIFIC_EXPERIENCE_DATA_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        message: "",
+        deletingSpecificExperienceData: false
       };
     default:
       return state;

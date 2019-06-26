@@ -46,7 +46,7 @@ class SpecificExperience extends Component {
           <div className="specific-experience-price">
             {this.props.specificExperienceObject.price}
           </div>
-          <button>RSVP</button>
+          {localStorage.getItem("token") && <button>RSVP</button>}
           <button onClick={this.goBack}>Back</button>
         </div>
       </div>

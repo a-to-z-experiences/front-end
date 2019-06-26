@@ -25,6 +25,7 @@ class HostingExperiences extends Component {
         <Link to="/host-an-experience">
           <div className="host-an-experience-title">Host an experience</div>
         </Link>
+        <div className="hosting-experiences-title">Experiences I'm Hosting</div>
         <button>Edit</button>
         <button>Delete</button>
       </div>

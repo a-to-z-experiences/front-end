@@ -26,9 +26,9 @@ function App() {
       <PrivateRoute exact path="/" component={UserHome} />
       <Route path="/available-experiences" component={AvailableExperiences} />
       <Route path="/experiences/:experienceId" component={SpecificExperience} />
-      <Route path="/hosting-experiences" component={HostingExperiences} />
-      <Route path="/host-an-experience" component={Form} />
-      <Route path="/edit-experience" component={Form} />
+      <PrivateRoute path="/hosting-experiences" component={HostingExperiences} />
+      <PrivateRoute path="/host-an-experience" component={Form} />
+      <PrivateRoute path="/edit-experience" component={Form} />
     </div>
   );
 }

@@ -59,7 +59,7 @@ export const login = credentials => dispatch => {
     .then(response => {
       console.log("LOGIN_SUCCESS_RESPONSE: ", response);
       localStorage.setItem("token", response.data.token);
-      dispatch({ type: LOGIN_SUCCESS });
+      dispatch({ type: LOGIN_SUCCESS, payload: response.data.message });
     })
     .catch(error => {
       console.log("LOGIN_FAILURE_ERROR: ", error);

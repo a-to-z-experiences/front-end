@@ -39,7 +39,7 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         loggingIn: false,
         error: "",
-        message: "",
+        message: action.payload,
       };
     case LOGIN_FAILURE:
       return {

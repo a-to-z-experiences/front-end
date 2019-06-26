@@ -15,8 +15,10 @@ class Login extends Component {
     return (
       <div className="login">
         <div className="register-login-title">Register/Login</div>
-        {this.props.error && <div>{this.props.error}</div>}
-        {this.props.message && <div>{this.props.message}</div>}
+        {this.props.error && <div className="error">{this.props.error}</div>}
+        {this.props.message && (
+          <div className="message">{this.props.message}</div>
+        )}
         <form>
           <input
             name="username"

@@ -12,6 +12,10 @@ class UserHome extends Component {
   render() {
     return (
       <div className="user-home">
+        {this.props.error && <div className="error">{this.props.error}</div>}
+        {this.props.message && (
+          <div className="message">{this.props.message}</div>
+        )}
         <div className="user-home-title">USER HOME</div>
         <div className="upcoming-experiences">UPCOMING EXPERIENCES</div>
       </div>
@@ -23,6 +27,7 @@ class UserHome extends Component {
 const mapStateToProps = state => {
   return {
     error: state.error,
+    message: state.message,
     availableExperiencesArray: state.AvailableExperiences
   };
 };

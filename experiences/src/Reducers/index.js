@@ -169,20 +169,20 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         postingNewExperienceData: true,
         error: "",
-        message: action.message
+        message: ""
       };
     case POST_NEW_EXPERIENCE_DATA_SUCCESS:
       return {
         ...state,
         postingNewExperienceData: false,
         error: "",
-        message: "",
+        message: action.message,
         userExperiences: action.updatedExperiences
       };
     case POST_NEW_EXPERIENCE_DATA_FAILURE:
       return {
         ...state,
-        postingNewExperienceData: true,
+        postingNewExperienceData: false,
         error: action.error,
         message: ""
       };

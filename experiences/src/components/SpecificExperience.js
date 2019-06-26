@@ -13,7 +13,7 @@ class SpecificExperience extends Component {
   }
   render() {
     return (
-      <div class="specific-experience-wrapper">
+      <div className="specific-experience-wrapper">
         <Link to="/">
           <div className="user-home-title">Home</div>
         </Link>

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 // import Link
 import { Link } from "react-router-dom";
+// import postNewExperience action creator
+import { postNewExperience } from "../actions";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
 
@@ -8,14 +10,14 @@ class Form extends Component {
   state = {
     newExperience: {
       title: "",
-      dates: "",
+      date: "",
       location: "",
       price: ""
     }
   };
   render() {
     return (
-      <div class="form">
+      <div className="form">
         <Link to="/">
           <div className="user-home-title">Home</div>
         </Link>
@@ -40,8 +42,8 @@ class Form extends Component {
             onChange={this.changeHandler}
           />
           <input
-            name="dates"
-            value={this.state.newExperience.dates}
+            name="date"
+            value={this.state.newExperience.date}
             placeholder="date"
             onChange={this.changeHandler}
           />
@@ -72,9 +74,11 @@ class Form extends Component {
       }
     });
   };
-  postNewExperienceHandler = event => {
+  hostNewExperienceHandler = event => {
     event.preventDefault();
-    this.props.postNewExperience(this.state.newExperience);
+    this.props.postNewExperience(this.state.newExperience).then(response => {
+      this.props.history.push("/available-experiences");
+    });
     this.setState({
       ...this.state,
       newExperience: {
@@ -102,5 +106,5 @@ const mapStateToProps = state => {
 // linking mapStateToProps, action creators to Form component
 export default connect(
   mapStateToProps,
-  {}
+  { postNewExperience }
 )(Form);

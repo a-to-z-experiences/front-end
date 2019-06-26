@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 // import getExperiencesData fn to Availableow us to match events with action objects that change the reducer's state that changes what we receive as props
-import { getAvailableExperiencesData, postNewExperience } from "../actions";
+import { getAvailableExperiencesData } from "../actions";
 // import link so you can link the divs to their individual ID pages,
 import { Link } from "react-router-dom";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
 
 class AvailableExperiences extends Component {
-  state={}
+  state = {};
   componentDidMount() {
     this.props.getAvailableExperiencesData();
   }
@@ -28,9 +28,7 @@ class AvailableExperiences extends Component {
           </div>
         </Link>
         <Link to="/host-an-experience">
-          <div className="host-an-experience-title">
-            Host an experience
-          </div>
+          <div className="host-an-experience-title">Host an experience</div>
         </Link>
         <div className="available-experiences">
           <div className="available-experiences-title">
@@ -64,5 +62,5 @@ const mapStateToProps = state => {
 // linking mapStateToProps, action creators to Login component
 export default connect(
   mapStateToProps,
-  { getAvailableExperiencesData, postNewExperience }
+  { getAvailableExperiencesData }
 )(AvailableExperiences);

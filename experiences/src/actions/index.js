@@ -170,8 +170,8 @@ export const getAvailableExperiencesData = () => dispatch => {
 // creating POSTNewExperience action creator
 export const postNewExperience = newExperienceObject => dispatch => {
   dispatch({ type: POST_NEW_EXPERIENCE_DATA_START });
-  // post cAVAILABLE to /experiences endpoint
-  axios
+  // post to /experiences endpoint
+  return axios
     .post(
       "https://atoz-backend.herokuapp.com/api/experiences",
       newExperienceObject
@@ -226,7 +226,7 @@ export const updateSpecificExperience = experienceID => dispatch => {
       dispatch({
         type: UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
         // i think you get AVAILABLE the updatedExperiences back
-        updatedExperiences: response.experiences, 
+        updatedExperiences: response.experiences,
         message: response.message
       });
     })

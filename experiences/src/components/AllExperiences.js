@@ -58,7 +58,7 @@ class AllExperiences extends Component {
               <div className="title">{experienceObject.title}</div>
               <div className="title">{experienceObject.dates}</div>
               <div className="title">{experienceObject.location}</div>
-              <button>Post New Experience</button>
+              <button>Add this experience</button>
               <button>Delete Experience</button>
             </div>
           </Link>

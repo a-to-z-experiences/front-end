@@ -9,6 +9,9 @@ import {
   GET_USER_DATA_START,
   GET_USER_DATA_SUCCESS,
   GET_USER_DATA_FAILURE,
+  GET_USER_EXPERIENCES_DATA_START,
+  GET_USER_EXPERIENCES_DATA_SUCCESS,
+  GET_USER_EXPERIENCES_DATA_FAILURE,
   GET_ALL_EXPERIENCES_DATA_START,
   GET_ALL_EXPERIENCES_DATA_SUCCESS,
   GET_ALL_EXPERIENCES_DATA_FAILURE,
@@ -30,10 +33,12 @@ const initialState = {
   loggingIn: false,
   registering: false,
   gettingUserData: false,
+  gettingUserExperiencesData: false,
   gettingExperiencesData: false,
   postingNewExperienceData: false,
   gettingSpecificExperienceData: false,
   userData: {},
+  userExperiences: [],
   userId: -1,
   allExperiencesArray: [],
   specificExperienceObject: {},
@@ -100,7 +105,9 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         gettingUserData: false,
         error: "",
-        message: ""
+        message: "",
+        userData: action.userDataObject,
+        userExperiences: action.userExperiencesArray
       };
     case GET_USER_DATA_FAILURE:
       return {
@@ -108,6 +115,29 @@ export const rootReducer = (state = initialState, action) => {
         gettingUserData: false,
         error: action.error,
         message: ""
+      };
+    case GET_USER_EXPERIENCES_DATA_START:
+      return {
+        ...state,
+        gettingUserExperiencesData: true,
+        error: "",
+        message: ''
+      }
+    case GET_USER_EXPERIENCES_DATA_SUCCESS: 
+      return {
+        ...state,
+        gettingUserExperiencesData: false,
+        error: "", 
+        message: "",
+        userExperiencesDataArray: action.payload,
+      }
+    case GET_USER_EXPERIENCES_DATA_FAILURE:
+      return {
+        ...state,
+        gettingUserExperiencesData: false,
+        error: action.error,
+        message: "",
+        userExperiencesDataArray: action.payload
       };
     case GET_ALL_EXPERIENCES_DATA_START:
       return {

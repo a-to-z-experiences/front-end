@@ -10,10 +10,18 @@ export const REGISTER_START = "REGISTER_START";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
-// creating getData variables for action types
+// creating getUserData variables for action types
 export const GET_USER_DATA_START = "GET_USER_DATA_START";
 export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_FAILURE = "GET_USER_DATA_FAILURE";
+
+// creating getUserExperiencesData variables for action types
+export const GET_USER_EXPERIENCES_DATA_START =
+  "GET_USER_EXPERIENCES_DATA_START";
+export const GET_USER_EXPERIENCES_DATA_SUCCESS =
+  "GET_USER_EXPERIENCES_DATA_SUCCESS";
+export const GET_USER_EXPERIENCES_DATA_FAILURE =
+  "GET_USER_EXPERIENCES_DATA_FAILURE";
 
 // creating getExperiencesData variables for action types
 export const GET_ALL_EXPERIENCES_DATA_START = "GET_ALL_EXPERIENCES_DATA_START";
@@ -102,11 +110,33 @@ export const getUserData = id => dispatch => {
     .get(`https://atoz-backend.herokuapp.com/api/users/${id}`)
     .then(response => {
       console.log("GET_USER_DATA_SUCCESS: ", response);
-      dispatch({ type: GET_USER_DATA_START, userData: response.data });
+      dispatch({ type: GET_USER_DATA_START, userDataObject: response.data, userExperiencesArray: response.data.experiences });
     })
     .catch(error => {
       console.log("GET_USER_DATA_FAILURE: ", error);
       dispatch({ type: GET_USER_DATA_FAILURE, error: error.message });
+    });
+};
+
+// creating getUserExperiences action creator, takes in ID of user
+export const getUserExperiencesData = id => dispatch => {
+  dispatch({ type: GET_USER_EXPERIENCES_DATA_START });
+  // interpolating ID value because it's a number, and the URL we get from has to use a string value
+  axios
+    .get(`https://atoz-backend.herokuapp.com/api/users/experiences/${id}`)
+    .then(response => {
+      console.log("GET_USER_DATA_SUCCESS: ", response);
+      dispatch({
+        type: GET_USER_EXPERIENCES_DATA_START,
+        userExperiencesDataArray: response.data
+      });
+    })
+    .catch(error => {
+      console.log("GET_USER_DATA_FAILURE: ", error);
+      dispatch({
+        type: GET_USER_EXPERIENCES_DATA_FAILURE,
+        error: error.message
+      });
     });
 };
 
@@ -146,7 +176,7 @@ export const postNewExperience = newExperienceObject => dispatch => {
       dispatch({
         type: POST_NEW_EXPERIENCE_DATA_SUCCESS,
         updatedExperiences: response.experiences,
-        message: response.message,
+        message: response.message
       });
     })
     .catch(error => {

@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 class UserHome extends Component {
   state = {};
   componentDidMount() {
-    getUserData(this.props.userId);
+    this.props.getUserData(this.props.userId);
   }
   render() {
     return (
@@ -40,7 +40,7 @@ const mapStateToProps = state => {
     message: state.message,
     userData: state.userData,
     userId: state.userId,
-    availableExperiencesArray: state.AvailableExperiences
+    userExperiences: state.userExperiences
   };
 };
 // linking mapStateToProps, action creators to UserHome component

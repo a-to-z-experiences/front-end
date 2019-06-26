@@ -7,14 +7,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 class AvailableExperiences extends Component {
-  state = {
-    newExperience: {
-      title: "",
-      dates: "",
-      location: "",
-      price: ""
-    }
-  };
+  state={}
   componentDidMount() {
     this.props.getAvailableExperiencesData();
   }
@@ -29,39 +22,17 @@ class AvailableExperiences extends Component {
             View Available Experiences
           </div>
         </Link>
-        <Link to="/posted-experiences">
-          <div className="posted-experiences-title">
-            View My Posted Experiences
+        <Link to="/hosting-experiences">
+          <div className="hosting-experiences-title">
+            View My Hosting Experiences
+          </div>
+        </Link>
+        <Link to="/host-an-experience">
+          <div className="host-an-experience-title">
+            Host an experience
           </div>
         </Link>
         <div className="available-experiences">
-          <form onSubmit={this.postNewExperienceHandler}>
-            <input
-              name="title"
-              value={this.state.newExperience.title}
-              placeholder="title"
-              onChange={this.changeHandler}
-            />
-            <input
-              name="dates"
-              value={this.state.newExperience.dates}
-              placeholder="date"
-              onChange={this.changeHandler}
-            />
-            <input
-              name="location"
-              value={this.state.newExperience.location}
-              placeholder="location"
-              onChange={this.changeHandler}
-            />
-            <input
-              name="price"
-              value={this.state.newExperience.price}
-              placeholder="price"
-              onChange={this.changeHandler}
-            />
-            <button>Post Experience</button>
-          </form>
           <div className="available-experiences-title">
             Available experiences
           </div>
@@ -81,30 +52,6 @@ class AvailableExperiences extends Component {
       </div>
     );
   }
-  changeHandler = event => {
-    event.preventDefault();
-    this.setState({
-      ...this.state,
-      newExperience: {
-        ...this.state.newExperience,
-        [event.target.name]: event.target.value
-      }
-    });
-  };
-  postNewExperienceHandler = event => {
-    event.preventDefault();
-    this.props.postNewExperience(this.state.newExperience);
-    this.setState({
-      ...this.state,
-      newExperience: {
-        ...this.state.newExperience,
-        title: "",
-        dates: "",
-        location: "",
-        price: ""
-      }
-    });
-  };
 }
 
 // creating mapStateToProps fn that takes in state from reducers. We pass props to Login by utilizing the reducer's state

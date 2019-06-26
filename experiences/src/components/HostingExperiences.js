@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
 
-class PostedExperiences extends Component {
+class HostingExperiences extends Component {
   state = {};
   render() {
     return (
-      <div className="posted-experiences">
+      <div className="hosting-experiences">
         <Link to="/">
           <div className="user-home-title">Home</div>
         </Link>
@@ -17,10 +17,13 @@ class PostedExperiences extends Component {
             View Available Experiences
           </div>
         </Link>
-        <Link to="/posted-experiences">
-          <div className="posted-experiences-title">
-            View My Posted Experiences
+        <Link to="/hosting-experiences">
+          <div className="hosting-experiences-title">
+            View My Hosting Experiences
           </div>
+        </Link>
+        <Link to="/host-an-experience">
+          <div className="host-an-experience-title">Host an experience</div>
         </Link>
         <button>Edit</button>
         <button>Delete</button>
@@ -43,4 +46,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {}
-)(PostedExperiences);
+)(HostingExperiences);

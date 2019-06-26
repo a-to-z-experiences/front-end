@@ -22,10 +22,13 @@ class SpecificExperience extends Component {
             View Available Experiences
           </div>
         </Link>
-        <Link to="/hosted-experiences">
-          <div className="hosted-experiences-title">
-            View My Posted Experiences
+        <Link to="/hosting-experiences">
+          <div className="hosting-experiences-title">
+            View My Hosting Experiences
           </div>
+        </Link>
+        <Link to="/host-an-experience">
+          <div className="host-an-experience-title">Host an experience</div>
         </Link>
         <div className="specific-experience">
           <div className="specific-experience-title">

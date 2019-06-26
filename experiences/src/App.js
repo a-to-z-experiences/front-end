@@ -13,7 +13,9 @@ import AvailableExperiences from "./components/AvailableExperiences";
 // importing specificExperience which is the component that shows when you click on an experiencediv within allexperiences
 import SpecificExperience from "./components/SpecificExperience";
 // importing PostedExperiences which shows all the experiences the user has posted/added
-import PostedExperiences from "./components/PostedExperiences";
+import HostingExperiences from "./components/HostingExperiences";
+// import Form component
+import Form from "./components/Form";
 // css file at end
 import "./App.css";
 
@@ -24,7 +26,9 @@ function App() {
       <PrivateRoute exact path="/" component={UserHome} />
       <Route path="/available-experiences" component={AvailableExperiences} />
       <Route path="/experiences/:experienceId" component={SpecificExperience} />
-      <Route path="/posted-experiences" component={PostedExperiences} />
+      <Route path="/hosting-experiences" component={HostingExperiences} />
+      <Route path="/host-an-experience" component={Form} />
+      <Route path="/edit-experience" component={Form} />
     </div>
   );
 }

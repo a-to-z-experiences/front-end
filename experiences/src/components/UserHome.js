@@ -26,10 +26,13 @@ class UserHome extends Component {
             View Available Experiences
           </div>
         </Link>
-        <Link to="/posted-experiences">
-          <div className="posted-experiences-title">
-            View My Posted Experiences
+        <Link to="/hosting-experiences">
+          <div className="hosting-experiences-title">
+            View My Hosting Experiences
           </div>
+        </Link>
+        <Link to="/host-an-experience">
+          <div className="host-an-experience-title">Host an experience</div>
         </Link>
         <div className="upcoming-experiences-title">
           My Upcoming Experiences

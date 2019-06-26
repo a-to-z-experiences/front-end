@@ -24,6 +24,7 @@ class UserHome extends Component {
           <div className="user-home-title">USER HOME</div>
         </Link>
         <div className="upcoming-experiences">UPCOMING EXPERIENCES</div>
+        <button>Delete experience</button>
         <Link to="/all-experiences">
           <div className="all-experiences">See All Experiences</div>
         </Link>

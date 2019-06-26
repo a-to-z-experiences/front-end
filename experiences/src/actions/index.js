@@ -110,7 +110,7 @@ export const getUserData = id => dispatch => {
     });
 };
 
-// creating getExperiencesData action creator
+// creating getALLExperiencesData action creator
 export const getAllExperiencesData = () => dispatch => {
   dispatch({ type: GET_ALL_EXPERIENCES_DATA_START });
   // get call to /experiences endpoint
@@ -132,6 +132,32 @@ export const getAllExperiencesData = () => dispatch => {
     });
 };
 
+// creating addNewExperience action creator
+export const addNewExperience = newExperienceObject => dispatch => {
+  dispatch({ type: ADD_NEW_EXPERIENCE_DATA_START });
+  // post call to /experiences endpoint
+  axios
+    .post(
+      "https://atoz-backend.herokuapp.com/api/experiences",
+      newExperienceObject
+    )
+    .then(response => {
+      console.log("ADD_NEW_EXPERIENCE_DATA_SUCCESS: ", response);
+      dispatch({
+        type: ADD_NEW_EXPERIENCE_DATA_SUCCESS,
+        updatedExperiences: response.experiences,
+        message: response.message,
+      });
+    })
+    .catch(error => {
+      console.log("ADD_NEW_EXPERIENCE_FAILURE_ERROR: ", error);
+      dispatch({
+        type: ADD_NEW_EXPERIENCE_DATA_FAILURE,
+        error: error.message
+      });
+    });
+};
+
 // creating getSpecificExperience action creator
 export const getSpecificExperience = experienceID => dispatch => {
   dispatch({ type: GET_SPECIFIC_EXPERIENCE_DATA_START });
@@ -142,7 +168,7 @@ export const getSpecificExperience = experienceID => dispatch => {
       console.log("GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
         type: GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
-        specificExperience: response.experiences
+        specificExperience: response.data
       });
     })
     .catch(error => {
@@ -182,7 +208,9 @@ export const deleteSpecificExperience = experienceID => dispatch => {
   dispatch({ type: DELETE_SPECIFIC_EXPERIENCE_DATA_START });
   // get call to /experiences endpoint
   axios
-    .delete(`https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`)
+    .delete(
+      `https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`
+    )
     .then(response => {
       console.log("DELETE_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
@@ -195,28 +223,6 @@ export const deleteSpecificExperience = experienceID => dispatch => {
       console.log("DELETE_SPECIFIC_EXPERIENCE_FAILURE_ERROR: ", error);
       dispatch({
         type: DELETE_SPECIFIC_EXPERIENCE_DATA_FAILURE,
-        error: error.message
-      });
-    });
-};
-
-// creating addNewExperience action creator
-export const addNewExperience = newExperienceObject => dispatch => {
-  dispatch({ type: ADD_NEW_EXPERIENCE_DATA_START });
-  // get call to /experiences endpoint
-  axios
-    .post("https://atoz-backend.herokuapp.com/api/experiences", newExperienceObject)
-    .then(response => {
-      console.log("ADD_NEW_EXPERIENCE_DATA_SUCCESS: ", response);
-      dispatch({
-        type: ADD_NEW_EXPERIENCE_DATA_SUCCESS,
-        updatedExperiences: response.experiences
-      });
-    })
-    .catch(error => {
-      console.log("ADD_NEW_EXPERIENCE_FAILURE_ERROR: ", error);
-      dispatch({
-        type: ADD_NEW_EXPERIENCE_DATA_FAILURE,
         error: error.message
       });
     });

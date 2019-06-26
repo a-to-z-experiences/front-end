@@ -22,7 +22,7 @@ function App() {
       <PrivateRoute exact path="/" component={UserHome} />
       <Route path="/all-experiences" component={AllExperiences} />
       <Route
-        path="/experiences/:experiencesId"
+        path="/experiences/:experienceId"
         component={SpecificExperience}
       />
     </div>

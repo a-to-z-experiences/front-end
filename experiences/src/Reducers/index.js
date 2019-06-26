@@ -11,7 +11,19 @@ import {
   GET_USER_DATA_FAILURE,
   GET_ALL_EXPERIENCES_DATA_START,
   GET_ALL_EXPERIENCES_DATA_SUCCESS,
-  GET_ALL_EXPERIENCES_DATA_FAILURE
+  GET_ALL_EXPERIENCES_DATA_FAILURE,
+  ADD_NEW_EXPERIENCE_DATA_START,
+  ADD_NEW_EXPERIENCE_DATA_SUCCESS,
+  ADD_NEW_EXPERIENCE_DATA_FAILURE,
+  GET_SPECIFIC_EXPERIENCE_DATA_START,
+  GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
+  GET_SPECIFIC_EXPERIENCE_DATA_FAILURE,
+  UPDATE_SPECIFIC_EXPERIENCE_DATA_START,
+  UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
+  UPDATE_SPECIFIC_EXPERIENCE_DATA_FAILURE,
+  DELETE_SPECIFIC_EXPERIENCE_DATA_START,
+  DELETE_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
+  DELETE_SPECIFIC_EXPERIENCE_DATA_FAILURE
 } from "../actions";
 // creating initialState variable, set to an object
 const initialState = {
@@ -19,9 +31,13 @@ const initialState = {
   registering: false,
   gettingUserData: false,
   gettingExperiencesData: false,
+  addingNewExperienceData: false,
+  gettingSpecificExperienceData: false,
   userData: {},
   userId: -1,
   allExperiencesArray: [],
+  specificExperienceObject: {},
+  specificExperienceId: -1,
   updating: false,
   message: ""
 };
@@ -105,13 +121,58 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         gettingExperiencesData: false,
         error: "",
-        allExperiencesArray: action.allExperiencesArray,
-        message: ""
+        message: "",
+        allExperiencesArray: action.allExperiencesArray
       };
     case GET_ALL_EXPERIENCES_DATA_FAILURE:
       return {
         ...state,
         gettingExperiencesData: false,
+        error: action.error,
+        message: ""
+      };
+    case ADD_NEW_EXPERIENCE_DATA_START:
+      return {
+        ...state,
+        addingNewExperienceData: true,
+        error: "",
+        message: action.message
+      };
+    case ADD_NEW_EXPERIENCE_DATA_SUCCESS:
+      return {
+        ...state,
+        addingNewExperienceData: false,
+        error: "",
+        message: "",
+        userExperiences: action.updatedExperiences
+      };
+    case ADD_NEW_EXPERIENCE_DATA_FAILURE:
+      return {
+        ...state,
+        addingNewExperienceData: true,
+        error: action.error,
+        message: ""
+      };
+    case GET_SPECIFIC_EXPERIENCE_DATA_START:
+      return {
+        ...state,
+        gettingSpecificExperienceData: true,
+        error: "",
+        message: action.message
+      };
+    case GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS:
+      return {
+        ...state,
+        gettingSpecificExperienceData: false,
+        error: "",
+        message: "",
+        specificExperienceObject: action.specificExperience,
+        specificExperienceId: action.specificExperience.id
+      };
+    case GET_SPECIFIC_EXPERIENCE_DATA_FAILURE:
+      return {
+        ...state,
+        gettingSpecificExperienceData: true,
         error: action.error,
         message: ""
       };

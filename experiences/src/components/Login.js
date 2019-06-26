@@ -16,6 +16,7 @@ class Login extends Component {
       <div className="login">
         <div className="register-login-title">Register/Login</div>
         {this.props.error && <div>{this.props.error}</div>}
+        {this.props.message && <div>{this.props.message}</div>}
         <form>
           <input
             name="username"
@@ -45,6 +46,7 @@ class Login extends Component {
     event.preventDefault();
     this.setState({
       credentials: {
+        ...this.state.credentials,
         [event.target.name]: event.target.value
       }
     });
@@ -59,9 +61,13 @@ class Login extends Component {
   // loginHandler for the Login button
   loginHandler = event => {
     event.preventDefault();
-    this.props.login(this.state.credentials);
+    this.props.login(this.state.credentials).then(response => {
+      this.props.history.push("/");
+    });
     this.setState({
+      ...this.state,
       credentials: {
+        ...this.state.credentials,
         username: "",
         password: ""
       }
@@ -72,7 +78,9 @@ class Login extends Component {
     event.preventDefault();
     this.props.register(this.state.credentials);
     this.setState({
+      ...this.state,
       credentials: {
+        ...this.state.credentials,
         username: "",
         password: ""
       }
@@ -82,7 +90,8 @@ class Login extends Component {
 // creating mapStateToProps fn that takes in state from reducers. We pass props to Login by utilizing the reducer's state
 const mapStateToProps = state => {
   return {
-    error: state.error
+    error: state.error,
+    message: state.message
   };
 };
 // linking mapStateToProps, action creators to Login component

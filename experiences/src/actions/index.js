@@ -54,7 +54,7 @@ export const DELETE_SPECIFIC_EXPERIENCE_DATA_FAILURE =
 // creating login action creator
 export const login = credentials => dispatch => {
   dispatch({ type: LOGIN_START });
-  axios
+  return axios
     .post("https://atoz-backend.herokuapp.com/api/login", credentials)
     .then(response => {
       console.log("LOGIN_SUCCESS_RESPONSE: ", response);
@@ -77,7 +77,7 @@ export const register = credentials => dispatch => {
     .post("https://atoz-backend.herokuapp.com/api/register", credentials) // or /users?
     .then(response => {
       console.log("REGISTER_SUCCESS_RESPONSE: ", response);
-      dispatch({ type: REGISTER_SUCCESS });
+      dispatch({ type: REGISTER_SUCCESS, payload: response.data.message });
     })
     .catch(error => {
       console.log("REGISTER_FAILURE_ERROR: ", error);

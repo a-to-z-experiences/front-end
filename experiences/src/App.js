@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/" component={UserHome} />
+      <PrivateRoute exact path="/" component={UserHome} />
       <Route path="/experiences" component={AvailableExperiences} />
     </div>
   );

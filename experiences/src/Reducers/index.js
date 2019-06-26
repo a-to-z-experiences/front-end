@@ -21,7 +21,8 @@ const initialState = {
   gettingExperiencesData: false,
   userArray: [],
   availableExperiencesArray: [],
-  updating: false
+  updating: false,
+  message: ""
 };
 // creating rootReducer fn. takes in a state object, action object, and returns a new state depending on the type property within the action object
 export const rootReducer = (state = initialState, action) => {
@@ -30,74 +31,86 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         loggingIn: true,
-        error: ""
+        error: "",
+        message: ""
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         loggingIn: false,
-        error: ""
+        error: "",
+        message: "",
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         loggingIn: false,
-        error: action.payload
+        error: action.payload,
+        message: "",
       };
     case REGISTER_START:
       return {
         ...state,
         registering: true,
-        error: ""
+        error: "",
+        message: "",
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
         registering: false,
-        error: ""
+        error: "",
+        message: action.payload
       };
     case REGISTER_FAILURE:
       return {
         ...state,
         registering: false,
-        error: action.payload
+        error: action.payload,
+        message: "",
       };
     case GET_USER_DATA_START:
       return {
         ...state,
         gettingUserData: true,
-        error: ""
+        error: "",
+        message: "",
       };
     case GET_USER_DATA_SUCCESS:
       return {
         ...state,
         gettingUserData: false,
-        error: ""
+        error: "",
+        message: "",
       };
     case GET_USER_DATA_FAILURE:
       return {
         ...state,
         gettingUserData: false,
-        error: action.payload
+        error: action.payload,
+        message: "",
       };
     case GET_EXPERIENCES_DATA_START:
       return {
         ...state,
         gettingExperiencesData: true,
-        error: ""
+        error: "",
+        message: "",
       };
     case GET_EXPERIENCES_DATA_SUCCESS:
       return {
         ...state,
         gettingExperiencesData: false,
         error: "",
-        availableExperiencesArray: action.payload
+        availableExperiencesArray: action.payload,
+        message: "",
       };
     case GET_EXPERIENCES_DATA_FAILURE:
       return {
         ...state,
         gettingExperiencesData: false,
-        error: action.payload
+        error: action.payload,
+        message: "",
       };
     default:
       return state;

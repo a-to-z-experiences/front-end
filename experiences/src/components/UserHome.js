@@ -5,9 +5,13 @@ import { getUserData } from "../actions";
 import { connect } from "react-redux";
 
 class UserHome extends Component {
+  state = {};
+  componentDidMount() {
+    getUserData();
+  }
   render() {
     return (
-        <div className="user-home">
+      <div className="user-home">
         <div className="user-home-title">USER HOME</div>
         <div className="upcoming-experiences">UPCOMING EXPERIENCES</div>
       </div>

@@ -8,8 +8,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import UserHome from "./components/UserHome";
 // importing Login which is the conditional component being displayed by PrivateRoute
 import Login from "./components/Login";
-// importing AvailableExperiences which contain all the experiences inside the data.experiences array
-import AvailableExperiences from "./components/AvailableExperiences";
+// importing AllExperiences which contain all the experiences inside the data.experiences array
+import AllExperiences from "./components/AllExperiences";
+// importing specificExperience which is the component that shows when you click on an experiencediv within allexperiences
+import SpecificExperience from "./components/SpecificExperience";
 // css file at end
 import "./App.css";
 
@@ -17,8 +19,12 @@ function App() {
   return (
     <div className="App">
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/" component={UserHome} />
-      <Route path="/experiences" component={AvailableExperiences} />
+      <PrivateRoute exact path="/" component={UserHome} />
+      <Route path="/all-experiences" component={AllExperiences} />
+      <Route
+        path="/experiences/:experienceId"
+        component={SpecificExperience}
+      />
     </div>
   );
 }

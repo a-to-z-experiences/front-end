@@ -9,6 +9,7 @@ body {
   font-variant-numeric: proportional-nums;
   text-rendering: optimizeLegibility;
   font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 code {

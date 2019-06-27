@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import Link
-import { Link } from "react-router-dom";
-// import Button and other stuff from reactstrap component
+// // import NavLink
+// import { NavLink } from "react-router-dom";
+// import Buthrefn and other stuff from reactstrap component
 import {
   Button,
   Form,
@@ -11,17 +11,36 @@ import {
   FormText,
   Container,
   Row,
-  Col
+  Col,
+  Collapse,
+  Navbar,
+  Navbarhrefggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  Dropdownhrefggle,
+  DropdownMenu,
+  DropdownItem
 } from "reactstrap";
-// import postNewExperience action creator
+// import postNewExperience action creahrefr
 import { postNewExperience } from "../actions";
-// import connect to connect the action creators and props we want from reducer's state to component
+// import connect href connect the action creahrefrs and props we want from reducer's state href component
 import { connect } from "react-redux";
-const divStyle = {
+const divNav = {
   display: "flex",
   alignItems: "center",
-  minHeight: "880px"
+  maxWidth: "800px",
+  margin: "0 auto",
+  marginBottom: "20px"
 };
+// const divStyle = {
+//   display: "flex",
+//   alignItems: "center",
+//   minHeight: "880px",
+//   maxWidth: "800px"
+// };
 class ExperienceForm extends Component {
   state = {
     newExperience: {
@@ -33,25 +52,35 @@ class ExperienceForm extends Component {
   };
   render() {
     return (
-      <div className="wrapper" style={divStyle}>
+      <div>
+        <Navbar color="light" light expand="md" style={divNav}>
+          <NavbarBrand href="/">Home</NavbarBrand>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="/available-experiences">
+                <div className="available-experiences-title">
+                  View Available Experiences
+                </div>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/hosting-experiences">
+                <div className="hosting-experiences-title">
+                  Experiences I'm Hosting
+                </div>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/host-an-experience">
+                <div className="host-an-experience-title">
+                  Host an experience
+                </div>
+              </NavLink>
+            </NavItem>
+          </Nav>
+        </Navbar>
         <Container className="d-flex justify-content-center">
           <div className="form">
-            <Link to="/">
-              <div className="user-home-title">Home</div>
-            </Link>
-            <Link to="/available-experiences">
-              <div className="available-experiences-title">
-                View Available Experiences
-              </div>
-            </Link>
-            <Link to="/hosting-experiences">
-              <div className="hosting-experiences-title">
-                Experiences I'm Hosting
-              </div>
-            </Link>
-            <Link to="/host-an-experience">
-              <div className="host-an-experience-title">Host an experience</div>
-            </Link>
             <Form onSubmit={this.hostNewExperienceHandler}>
               <FormGroup>
                 <Input
@@ -98,7 +127,7 @@ class ExperienceForm extends Component {
                 <FormText>Enter the price of your experience</FormText>
               </FormGroup>
               <Button color="success" block>
-                Add to Hosting Experiences
+                Add Experience
               </Button>
             </Form>
           </div>
@@ -119,7 +148,7 @@ class ExperienceForm extends Component {
   hostNewExperienceHandler = event => {
     event.preventDefault();
     this.props.postNewExperience(this.state.newExperience).then(response => {
-      this.props.history.push("/available-experiences");
+      this.props.hishrefry.push("/available-experiences");
     });
     this.setState({
       ...this.state,
@@ -134,8 +163,8 @@ class ExperienceForm extends Component {
   };
 }
 
-// creating mapStateToProps fn that takes in state from reducers. We pass props to component by utilizing the reducer's state
-const mapStateToProps = state => {
+// creating mapStatehrefProps fn that takes in state from reducers. We pass props href component by utilizing the reducer's state
+const mapStatehrefProps = state => {
   return {
     error: state.error,
     message: state.message
@@ -145,8 +174,8 @@ const mapStateToProps = state => {
   };
 };
 
-// linking mapStateToProps, action creators to Form component
+// NavLinking mapStatehrefProps, action creahrefrs href Form component
 export default connect(
-  mapStateToProps,
+  mapStatehrefProps,
   { postNewExperience }
 )(ExperienceForm);

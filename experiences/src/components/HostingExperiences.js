@@ -17,9 +17,9 @@ class HostingExperiences extends Component {
             View Available Experiences
           </div>
         </Link>
-        <Link to="/hosting-experiences">
-          <div className="hosting-experiences-title">
-            View My Hosting Experiences
+        <Link to="/available-experiences">
+          <div className="available-experiences-title">
+            Experiences I'm Hosting
           </div>
         </Link>
         <Link to="/host-an-experience">

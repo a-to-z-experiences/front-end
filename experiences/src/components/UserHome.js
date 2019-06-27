@@ -28,7 +28,7 @@ class UserHome extends Component {
         </Link>
         <Link to="/hosting-experiences">
           <div className="hosting-experiences-title">
-            View My Hosting Experiences
+            Experiences I'm Hosting
           </div>
         </Link>
         <Link to="/host-an-experience">

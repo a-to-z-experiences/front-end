@@ -1,7 +1,19 @@
 import React, { Component } from "react";
-// import connect to connect the action creators and props we want from reducer's state to component
+// import Button and other stuff from reactstrap component
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
 // importing link so I can link stuff
 import { Link } from "react-router-dom";
+// import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
 // import login and register action creators
 import { login, register } from "../actions";
@@ -15,38 +27,50 @@ class Login extends Component {
   };
   render() {
     return (
-      <div className="login">
-        <div className="register-login-title">Register/Login</div>
-        {this.props.error && <div className="error">{this.props.error}</div>}
-        {this.props.message && (
-          <div className="message">{this.props.message}</div>
-        )}
-        <form>
-          <input
-            name="username"
-            type="string"
-            placeholder="Enter username here"
-            value={this.state.credentials.username}
-            onChange={this.changeHandler}
-            required
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Enter password here"
-            value={this.state.credentials.password}
-            onChange={this.changeHandler}
-            required
-          />
-          <button onClick={this.loginHandler}>Login</button>
-          <button onClick={this.registerHandler}>Register</button>
-        </form>
-        <Link to="/available-experiences">
-          <div className="available-experiences-title">
-            View Available Experiences
-          </div>
-        </Link>
-      </div>
+      <Container className="d-flex justify-content-center">
+        <div className="login">
+          <div className="register-login-title">Register/Login</div>
+          {this.props.error && <div className="error">{this.props.error}</div>}
+          {this.props.message && (
+            <div className="message">{this.props.message}</div>
+          )}
+          <Form>
+            <FormGroup>
+              <Input
+                name="username"
+                type="string"
+                placeholder="Enter username here"
+                value={this.state.credentials.username}
+                onChange={this.changeHandler}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                name="password"
+                type="password"
+                placeholder="Enter password here"
+                value={this.state.credentials.password}
+                onChange={this.changeHandler}
+                required
+              />
+            </FormGroup>
+
+            <Button color="primary" block onClick={this.loginHandler}>
+              Login
+            </Button>
+
+            <Button color="warning" block onClick={this.registerHandler}>
+              Register
+            </Button>
+          </Form>
+          <Link to="/available-experiences">
+            <div className="available-experiences-title">
+              View Available Experiences
+            </div>
+          </Link>
+        </div>
+      </Container>
     );
   }
 

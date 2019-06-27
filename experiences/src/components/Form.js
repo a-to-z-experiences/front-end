@@ -1,12 +1,28 @@
 import React, { Component } from "react";
 // import Link
 import { Link } from "react-router-dom";
+// import Button and other stuff from reactstrap component
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Container,
+  Row,
+  Col
+} from "reactstrap";
 // import postNewExperience action creator
 import { postNewExperience } from "../actions";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
-
-class Form extends Component {
+const divStyle = {
+  display: "flex",
+  alignItems: "center",
+  minHeight: "880px"
+};
+class ExperienceForm extends Component {
   state = {
     newExperience: {
       title: "",
@@ -17,50 +33,76 @@ class Form extends Component {
   };
   render() {
     return (
-      <div className="form">
-        <Link to="/">
-          <div className="user-home-title">Home</div>
-        </Link>
-        <Link to="/available-experiences">
-          <div className="available-experiences-title">
-            View Available Experiences
+      <div className="wrapper" style={divStyle}>
+        <Container className="d-flex justify-content-center">
+          <div className="form">
+            <Link to="/">
+              <div className="user-home-title">Home</div>
+            </Link>
+            <Link to="/available-experiences">
+              <div className="available-experiences-title">
+                View Available Experiences
+              </div>
+            </Link>
+            <Link to="/hosting-experiences">
+              <div className="hosting-experiences-title">
+                Experiences I'm Hosting
+              </div>
+            </Link>
+            <Link to="/host-an-experience">
+              <div className="host-an-experience-title">Host an experience</div>
+            </Link>
+            <Form onSubmit={this.hostNewExperienceHandler}>
+              <FormGroup>
+                <Input
+                  valid={this.state.newExperience.title}
+                  name="title"
+                  type="string"
+                  value={this.state.newExperience.title}
+                  placeholder="title..."
+                  onChange={this.changeHandler}
+                />
+                <FormText>Enter the title of your experience</FormText>
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  valid={this.state.newExperience.date}
+                  name="date"
+                  type="string"
+                  value={this.state.newExperience.date}
+                  placeholder="date..."
+                  onChange={this.changeHandler}
+                />
+                <FormText>Enter the date of your experience</FormText>
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  valid={this.state.newExperience.location}
+                  name="location"
+                  type="string"
+                  value={this.state.newExperience.location}
+                  placeholder="location..."
+                  onChange={this.changeHandler}
+                />
+                <FormText>Enter the location of your experience</FormText>
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  valid={this.state.newExperience.price}
+                  name="price"
+                  type="string"
+                  value={this.state.newExperience.price}
+                  placeholder="price..."
+                  onChange={this.changeHandler}
+                />
+                <FormText>Enter the price of your experience</FormText>
+              </FormGroup>
+              <Button color="success" block>
+                Add to Hosting Experiences
+              </Button>
+            </Form>
           </div>
-        </Link>
-        <Link to="/hosting-experiences">
-          <div className="hosting-experiences-title">
-            View My Hosting Experiences
-          </div>
-        </Link>
-        <Link to="/host-an-experience">
-          <div className="host-an-experience-title">Host an experience</div>
-        </Link>
-        <form onSubmit={this.hostNewExperienceHandler}>
-          <input
-            name="title"
-            value={this.state.newExperience.title}
-            placeholder="title"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="date"
-            value={this.state.newExperience.date}
-            placeholder="date"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="location"
-            value={this.state.newExperience.location}
-            placeholder="location"
-            onChange={this.changeHandler}
-          />
-          <input
-            name="price"
-            value={this.state.newExperience.price}
-            placeholder="price"
-            onChange={this.changeHandler}
-          />
-          <button>Add to Hosting Experiences</button>
-        </form>
+        </Container>
       </div>
     );
   }
@@ -107,4 +149,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { postNewExperience }
-)(Form);
+)(ExperienceForm);

@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "pnum";
+  font-variant-numeric: proportional-nums;
+  text-rendering: optimizeLegibility;
+  font-size: 62.5%;
 }
 
 code {

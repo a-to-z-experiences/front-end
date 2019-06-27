@@ -24,6 +24,8 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+// import link
+import { Link } from "react-router-dom";
 // import postNewExperience action creahrefr
 import { postNewExperience } from "../actions";
 // import connect href connect the action creahrefrs and props we want from reducer's state href component
@@ -54,24 +56,26 @@ class ExperienceForm extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md" style={divNav}>
-          <NavbarBrand href="/">Home</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">
+            Home
+          </NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/available-experiences">
+              <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
                 </div>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/hosting-experiences">
+              <NavLink tag={Link} to="/hosting-experiences">
                 <div className="hosting-experiences-title">
                   Experiences I'm Hosting
                 </div>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/host-an-experience">
+              <NavLink tag={Link} to="/host-an-experience">
                 <div className="host-an-experience-title">
                   Host an experience
                 </div>

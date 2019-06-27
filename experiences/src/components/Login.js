@@ -24,7 +24,7 @@ const loginStyle = {
   alignItems: "center",
   justifyContent: "center",
   minHeight: "880px",
-  minWidth: "800px",
+  minWidth: "800px"
 };
 const alertStyle = {
   display: "flex",
@@ -82,7 +82,7 @@ class Login extends Component {
             <Button color="warning" block onClick={this.registerHandler}>
               Register
             </Button>
-            <NavLink href="/available-experiences">
+            <NavLink tag={Link} to="/available-experiences">
               <div className="available-experiences-title">
                 View Available Experiences
               </div>

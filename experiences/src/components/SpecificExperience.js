@@ -44,24 +44,26 @@ class SpecificExperience extends Component {
     return (
       <div className="specific-experience-wrapper">
         <Navbar color="light" light expand="md" style={divNav}>
-          <NavbarBrand href="/">Home</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">
+            Home
+          </NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/available-experiences">
+              <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
                 </div>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/hosting-experiences">
+              <NavLink tag={Link} to="/hosting-experiences">
                 <div className="hosting-experiences-title">
                   Experiences I'm Hosting
                 </div>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/host-an-experience">
+              <NavLink tag={Link} to="/host-an-experience">
                 <div className="host-an-experience-title">
                   Host an experience
                 </div>

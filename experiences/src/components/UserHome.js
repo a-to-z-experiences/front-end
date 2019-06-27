@@ -43,31 +43,31 @@ class UserHome extends Component {
   render() {
     return (
       <div className="user-home">
-        {this.props.error && (
-          <div className="error">{this.props.error}</div>
-        )}
+        {this.props.error && <div className="error">{this.props.error}</div>}
         {this.props.message && (
           <div className="message">{this.props.message}</div>
         )}
         <Navbar color="light" light expand="md" style={divNav}>
-          <NavbarBrand href="/">Home</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">
+            Home
+          </NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/available-experiences">
+              <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
                 </div>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/hosting-experiences">
+              <NavLink tag={Link} to="/hosting-experiences">
                 <div className="hosting-experiences-title">
                   Experiences I'm Hosting
                 </div>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/host-an-experience">
+              <NavLink tag={Link} to="/host-an-experience">
                 <div className="host-an-experience-title">
                   Host an experience
                 </div>
@@ -75,10 +75,8 @@ class UserHome extends Component {
             </NavItem>
           </Nav>
         </Navbar>
-        <div className="upcoming-experiences-title">
-          My Upcoming Experiences
-        </div>
-        <button>Remove experience</button>
+        <div className="upcoming-experiences-title">Upcoming Experiences</div>
+        <button>Remove</button>
       </div>
     );
   }

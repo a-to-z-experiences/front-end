@@ -59,7 +59,7 @@ class ExperienceForm extends Component {
             <NavItem>
               <NavLink href="/available-experiences">
                 <div className="available-experiences-title">
-                  View Available Experiences
+                  Available Experiences
                 </div>
               </NavLink>
             </NavItem>
@@ -90,6 +90,7 @@ class ExperienceForm extends Component {
                   value={this.state.newExperience.title}
                   placeholder="title..."
                   onChange={this.changeHandler}
+                  required
                 />
                 <FormText>Enter the title of your experience</FormText>
               </FormGroup>
@@ -101,6 +102,7 @@ class ExperienceForm extends Component {
                   value={this.state.newExperience.date}
                   placeholder="date..."
                   onChange={this.changeHandler}
+                  required
                 />
                 <FormText>Enter the date of your experience</FormText>
               </FormGroup>
@@ -112,6 +114,7 @@ class ExperienceForm extends Component {
                   value={this.state.newExperience.location}
                   placeholder="location..."
                   onChange={this.changeHandler}
+                  required
                 />
                 <FormText>Enter the location of your experience</FormText>
               </FormGroup>
@@ -123,6 +126,7 @@ class ExperienceForm extends Component {
                   value={this.state.newExperience.price}
                   placeholder="price..."
                   onChange={this.changeHandler}
+                  required
                 />
                 <FormText>Enter the price of your experience</FormText>
               </FormGroup>

@@ -9,7 +9,9 @@ import {
   FormText,
   Container,
   Row,
-  Col
+  Col,
+  NavLink,
+  Alert
 } from "reactstrap";
 // importing link so I can link stuff
 import { Link } from "react-router-dom";
@@ -17,7 +19,19 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 // import login and register action creators
 import { login, register } from "../actions";
-
+const loginStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: "880px",
+  minWidth: "800px",
+};
+const alertStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  maxWidth: "250px"
+};
 class Login extends Component {
   state = {
     credentials: {
@@ -27,16 +41,20 @@ class Login extends Component {
   };
   render() {
     return (
-      <Container className="d-flex justify-content-center">
-        <div className="login">
-          <div className="register-login-title">Register/Login</div>
-          {this.props.error && <div className="error">{this.props.error}</div>}
-          {this.props.message && (
-            <div className="message">{this.props.message}</div>
-          )}
+      <FormGroup style={loginStyle}>
+        <Container className="d-flex justify-content-center">
           <Form>
+            <div className="login" style={alertStyle}>
+              {this.props.error && (
+                <Alert color="danger">{this.props.error}</Alert>
+              )}
+              {this.props.message && (
+                <Alert color="success">{this.props.message}</Alert>
+              )}
+            </div>
             <FormGroup>
               <Input
+                valid={this.state.credentials.username}
                 name="username"
                 type="string"
                 placeholder="Enter username here"
@@ -47,6 +65,7 @@ class Login extends Component {
             </FormGroup>
             <FormGroup>
               <Input
+                valid={this.state.credentials.password}
                 name="password"
                 type="password"
                 placeholder="Enter password here"
@@ -63,14 +82,14 @@ class Login extends Component {
             <Button color="warning" block onClick={this.registerHandler}>
               Register
             </Button>
+            <NavLink href="/available-experiences">
+              <div className="available-experiences-title">
+                View Available Experiences
+              </div>
+            </NavLink>
           </Form>
-          <Link to="/available-experiences">
-            <div className="available-experiences-title">
-              View Available Experiences
-            </div>
-          </Link>
-        </div>
-      </Container>
+        </Container>
+      </FormGroup>
     );
   }
 

@@ -75,7 +75,7 @@ class ExperienceForm extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/host-an-experience">
+              <NavLink active tag={Link} to="/host-an-experience">
                 <div className="host-an-experience-title">
                   Host an experience
                 </div>
@@ -149,6 +149,7 @@ class ExperienceForm extends Component {
       ...this.state,
       newExperience: {
         ...this.state.newExperience,
+        user_id: this.props.userId,
         [event.target.name]: event.target.value
       }
     });
@@ -156,7 +157,7 @@ class ExperienceForm extends Component {
   hostNewExperienceHandler = event => {
     event.preventDefault();
     this.props.postNewExperience(this.state.newExperience).then(response => {
-      this.props.hishrefry.push("/available-experiences");
+      this.props.history.push("/available-experiences");
     });
     this.setState({
       ...this.state,
@@ -172,18 +173,18 @@ class ExperienceForm extends Component {
 }
 
 // creating mapStatehrefProps fn that takes in state from reducers. We pass props href component by utilizing the reducer's state
-const mapStatehrefProps = state => {
+const mapStateToProps = state => {
   return {
     error: state.error,
-    message: state.message
+    message: state.message,
     // userData: state.userData,
-    // userId: state.userId,
+    userId: state.userId
     // userExperiences: state.userExperiences
   };
 };
 
 // NavLinking mapStatehrefProps, action creahrefrs href Form component
 export default connect(
-  mapStatehrefProps,
+  mapStateToProps,
   { postNewExperience }
 )(ExperienceForm);

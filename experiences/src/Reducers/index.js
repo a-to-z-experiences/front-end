@@ -12,6 +12,9 @@ import {
   GET_USER_EXPERIENCES_DATA_START,
   GET_USER_EXPERIENCES_DATA_SUCCESS,
   GET_USER_EXPERIENCES_DATA_FAILURE,
+  GET_USER_HOSTING_EXPERIENCES_DATA_START,
+  GET_USER_HOSTING_EXPERIENCES_DATA_SUCCESS,
+  GET_USER_HOSTING_EXPERIENCES_DATA_FAILURE,
   GET_AVAILABLE_EXPERIENCES_DATA_START,
   GET_AVAILABLE_EXPERIENCES_DATA_SUCCESS,
   GET_AVAILABLE_EXPERIENCES_DATA_FAILURE,
@@ -34,6 +37,7 @@ const initialState = {
   registering: false,
   gettingUserData: false,
   gettingUserExperiencesData: false,
+  gettingUserHostingExperiencesData: false,
   gettingExperiencesData: false,
   postingNewExperienceData: false,
   gettingSpecificExperienceData: false,
@@ -41,6 +45,7 @@ const initialState = {
   deletingSpecificExperienceData: false,
   userData: {},
   userExperiences: [],
+  userHostingExperiencesDataArray: [],
   userId: -1,
   availableExperiencesArray: [],
   specificExperienceObject: {},
@@ -136,10 +141,31 @@ export const rootReducer = (state = initialState, action) => {
     case GET_USER_EXPERIENCES_DATA_FAILURE:
       return {
         ...state,
-        gettingUserExperiencesData: false,
         error: action.error,
         message: "",
-        userExperiencesDataArray: action.payload
+        gettingUserExperiencesData: false
+      };
+    case GET_USER_HOSTING_EXPERIENCES_DATA_START:
+      return {
+        ...state,
+        error: "",
+        message: "",
+        gettingUserHostingExperiencesData: true
+      };
+    case GET_USER_HOSTING_EXPERIENCES_DATA_SUCCESS:
+      return {
+        ...state,
+        error: "",
+        message: "",
+        gettingUserHostingExperiencesData: false,
+        userHostingExperiencesDataArray: action.userHostingExperiencesDataArray
+      };
+    case GET_USER_HOSTING_EXPERIENCES_DATA_FAILURE:
+      return {
+        ...state,
+        gettingUserHostingExperiencesData: false,
+        error: action.error,
+        message: ""
       };
     case GET_AVAILABLE_EXPERIENCES_DATA_START:
       return {

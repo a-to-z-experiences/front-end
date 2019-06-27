@@ -23,6 +23,14 @@ export const GET_USER_EXPERIENCES_DATA_SUCCESS =
 export const GET_USER_EXPERIENCES_DATA_FAILURE =
   "GET_USER_EXPERIENCES_DATA_FAILURE";
 
+// creating getUserHostingExperiencesData variables for action types
+export const GET_USER_HOSTING_EXPERIENCES_DATA_START =
+  "GET_USER_HOSTING_EXPERIENCES_DATA_START";
+export const GET_USER_HOSTING_EXPERIENCES_DATA_SUCCESS =
+  "GET_USER_HOSTING_EXPERIENCES_DATA_SUCCESS";
+export const GET_USER_HOSTING_EXPERIENCES_DATA_FAILURE =
+  "GET_USER_HOSTING_EXPERIENCES_DATA_FAILURE";
+
 // creating getExperiencesData variables for action types
 export const GET_AVAILABLE_EXPERIENCES_DATA_START =
   "GET_AVAILABLE_EXPERIENCES_DATA_START";
@@ -124,11 +132,11 @@ export const getUserData = id => dispatch => {
 };
 
 // creating getUserExperiences action creator, takes in ID of user
-export const getUserExperiencesData = id => dispatch => {
+export const getUserExperiencesData = userId => dispatch => {
   dispatch({ type: GET_USER_EXPERIENCES_DATA_START });
   // interpolating ID value because it's a number, and the URL we get from has to use a string value
   axios
-    .get(`https://atoz-backend.herokuapp.com/api/users/experiences/${id}`)
+    .get(`https://atoz-backend.herokuapp.com/api/users/experiences/${userId}`)
     .then(response => {
       console.log("GET_USER_DATA_SUCCESS: ", response);
       dispatch({
@@ -140,6 +148,28 @@ export const getUserExperiencesData = id => dispatch => {
       console.log("GET_USER_DATA_FAILURE: ", error);
       dispatch({
         type: GET_USER_EXPERIENCES_DATA_FAILURE,
+        error: error.message
+      });
+    });
+};
+
+// creating getUserHostingExperiences action creator, takes in ID of user
+export const getUserHostingExperiencesData = userId => dispatch => {
+  dispatch({ type: GET_USER_HOSTING_EXPERIENCES_DATA_START });
+  // interpolating ID value because it's a number, and the URL we get from has to use a string value
+  axios
+    .get(`https://atoz-backend.herokuapp.com/api/users/experiences/${userId}`)
+    .then(response => {
+      console.log("GET_USER_HOSTING_DATA_SUCCESS: ", response);
+      dispatch({
+        type: GET_USER_HOSTING_EXPERIENCES_DATA_SUCCESS,
+        userHostingExperiencesDataArray: response.data.experiences
+      });
+    })
+    .catch(error => {
+      console.log("GET_USER_HOSTING_DATA_FAILURE: ", error);
+      dispatch({
+        type: GET_USER_HOSTING_EXPERIENCES_DATA_FAILURE,
         error: error.message
       });
     });

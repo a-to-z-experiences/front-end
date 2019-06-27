@@ -76,7 +76,7 @@ class UserHome extends Component {
           </Nav>
         </Navbar>
         <div className="upcoming-experiences-title">Upcoming Experiences</div>
-        <button>Remove</button>
+        <Button color="danger">Remove</Button>
       </div>
     );
   }

@@ -24,7 +24,10 @@ import {
   UncontrolledDropdown,
   Dropdownhrefggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Toast,
+  ToastBody,
+  ToastHeader
 } from "reactstrap";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
@@ -49,7 +52,7 @@ class AvailableExperiences extends Component {
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/available-experiences">
+              <NavLink active tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
                 </div>
@@ -76,17 +79,20 @@ class AvailableExperiences extends Component {
             Available experiences
           </div>
           {this.props.availableExperiencesArray.map(experienceObject => (
-            <NavLink
-              tag={Link}
-              to={`/experiences/${experienceObject.id}`}
-              key={experienceObject.id}
-            >
-              <div className="experience">
-                <div className="title">{experienceObject.title}</div>
-                <div className="title">{experienceObject.dates}</div>
-                <div className="title">{experienceObject.location}</div>
-              </div>
-            </NavLink>
+            <div className="experience" key={experienceObject.id}>
+              <Toast>
+                <ToastHeader>{experienceObject.title}</ToastHeader>
+                <ToastBody>
+                  <div>{experienceObject.date}</div>
+                  <div>{experienceObject.location}</div>
+                </ToastBody>
+                <NavLink tag={Link} to={`/experiences/${experienceObject.id}`}>
+                  <Button color="primary" size="sm">
+                    Details
+                  </Button>
+                </NavLink>
+              </Toast>
+            </div>
           ))}
         </div>
       </div>

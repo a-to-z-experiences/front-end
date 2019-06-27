@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import link so you can link stuff
 import { Link } from "react-router-dom";
+import { getUserHostingExperiencesData } from "../actions";
 // import Buthrefn and other stuff from reactstrap component
 import {
   Button,
@@ -22,7 +23,8 @@ import {
   UncontrolledDropdown,
   Dropdownhrefggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Spinner
 } from "reactstrap";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
@@ -34,43 +36,55 @@ const divNav = {
   marginBottom: "20px"
 };
 class HostingExperiences extends Component {
-  state = {};
+  state = {
+    // userHostingExperiencesDataArray: this.props.userHostingExperiencesDataArray,
+    // filteredUserHostingExperiencesDataArray: {}
+  };
+  componentDidMount() {
+    this.props.getUserHostingExperiencesData(this.props.userId);
+  }
   render() {
-    return (
-      <div className="hosting-experiences">
-        <Navbar color="light" light expand="md" style={divNav}>
-          <NavbarBrand tag={Link} to="/">
-            Home
-          </NavbarBrand>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink tag={Link} to="/available-experiences">
-                <div className="available-experiences-title">
-                  Available Experiences
-                </div>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/hosting-experiences">
-                <div className="hosting-experiences-title">
-                  Experiences I'm Hosting
-                </div>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/host-an-experience">
-                <div className="host-an-experience-title">
-                  Host an experience
-                </div>
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Navbar>
-        <div className="hosting-experiences-title">Experiences I'm Hosting</div>
-        <button>Edit</button>
-        <button>Delete</button>
-      </div>
-    );
+    console.log("hostingarray: ", this.props.userHostingExperiencesDataArray);
+    if (!this.props.userHostingExperiencesDataArray) {
+      return <Spinner color="info" />;
+    } else
+      return (
+        <div className="hosting-experiences">
+          <Navbar color="light" light expand="md" style={divNav}>
+            <NavbarBrand tag={Link} to="/">
+              Home
+            </NavbarBrand>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink tag={Link} to="/available-experiences">
+                  <div className="available-experiences-title">
+                    Available Experiences
+                  </div>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink active tag={Link} to="/hosting-experiences">
+                  <div className="hosting-experiences-title">
+                    Experiences I'm Hosting
+                  </div>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/host-an-experience">
+                  <div className="host-an-experience-title">
+                    Host an experience
+                  </div>
+                </NavLink>
+              </NavItem>
+            </Nav>
+          </Navbar>
+          {this.props.userHostingExperiencesDataArray.map(
+            hostingExperienceObj => (
+              <div>{hostingExperienceObj.title}</div>
+            )
+          )}
+        </div>
+      );
   }
 }
 // creating mapStateToProps fn that takes in state from reducers. We pass props to component by utilizing the reducer's state
@@ -80,12 +94,12 @@ const mapStateToProps = state => {
     message: state.message,
     userData: state.userData,
     userId: state.userId,
-    userExperiences: state.userExperiences
+    userHostingExperiencesDataArray: state.userHostingExperiencesDataArray
   };
 };
 
 // linking mapStateToProps, action creators to PostedExperiences component
 export default connect(
   mapStateToProps,
-  {}
+  { getUserHostingExperiencesData }
 )(HostingExperiences);

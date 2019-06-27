@@ -49,7 +49,7 @@ class SpecificExperience extends Component {
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/available-experiences">
+              <NavLink active tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
                 </div>
@@ -87,8 +87,14 @@ class SpecificExperience extends Component {
           <div className="specific-experience-price">
             {this.props.specificExperienceObject.price}
           </div>
-          {localStorage.getItem("token") && <button>RSVP</button>}
-          <button onClick={this.goBack}>Back</button>
+          {localStorage.getItem("token") && (
+            <Button color="success" size="sm">
+              RSVP
+            </Button>
+          )}
+          <Button color="info" size="sm" onClick={this.goBack}>
+            Back
+          </Button>
         </div>
       </div>
     );

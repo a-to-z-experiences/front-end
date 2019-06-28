@@ -101,18 +101,7 @@ class ExperienceForm extends Component {
                 />
                 <FormText>Enter the title of your experience</FormText>
               </FormGroup>
-              <FormGroup>
-                <Input
-                  valid={this.state.newExperience.date}
-                  name="date"
-                  type="string"
-                  value={this.state.newExperience.date}
-                  placeholder="date"
-                  onChange={this.changeHandler}
-                  required
-                />
-                <FormText>Enter the date of your experience</FormText>
-              </FormGroup>
+
               <FormGroup>
                 <Input
                   valid={this.state.newExperience.location}
@@ -124,6 +113,18 @@ class ExperienceForm extends Component {
                   required
                 />
                 <FormText>Enter the location of your experience</FormText>
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  valid={this.state.newExperience.date}
+                  name="date"
+                  type="string"
+                  value={this.state.newExperience.date}
+                  placeholder="date"
+                  onChange={this.changeHandler}
+                  required
+                />
+                <FormText>Enter the date of your experience</FormText>
               </FormGroup>
               <FormGroup>
                 <Input

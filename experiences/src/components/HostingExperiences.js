@@ -95,11 +95,11 @@ class HostingExperiences extends Component {
                     <div className="hosting-experience-title">
                       {hostingExperienceObj.title}
                     </div>
-                    <div className="hosting-experience-date">
-                      date: {hostingExperienceObj.date}
-                    </div>
                     <div className="hosting-experience-location">
                       location: {hostingExperienceObj.location}
+                    </div>
+                    <div className="hosting-experience-date">
+                      date: {hostingExperienceObj.date}
                     </div>
                   </div>
                 </Link>

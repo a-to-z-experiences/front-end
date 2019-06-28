@@ -106,11 +106,11 @@ class UserHome extends Component {
                 <div className="rsvped-experience-title">
                   {userRsvpedExperienceObject.title}
                 </div>
-                <div className="rsvped-experience-date">
-                  date: {userRsvpedExperienceObject.date}
-                </div>
                 <div className="rsvped-experience-location">
                   location: {userRsvpedExperienceObject.location}
+                </div>
+                <div className="rsvped-experience-date">
+                  date: {userRsvpedExperienceObject.date}
                 </div>
               </div>
             )

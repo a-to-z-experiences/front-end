@@ -71,12 +71,7 @@ class SpecificAvailableExperience extends Component {
                 </div>
               </NavLink>
             </NavItem>
-            <Button
-              inline
-              color="secondary"
-              size="sm"
-              onClick={this.logout}
-            >
+            <Button inline color="secondary" size="sm" onClick={this.logout}>
               Logout
             </Button>
           </Nav>
@@ -90,12 +85,13 @@ class SpecificAvailableExperience extends Component {
               {this.props.specificExperienceObject.description}
             </div>
             <div className="divider" />
-            <div className="specific-available-experience-date">
-              date: {this.props.specificExperienceObject.date}
-            </div>
             <div className="specific-available-experience-location">
               location: {this.props.specificExperienceObject.location}
             </div>
+            <div className="specific-available-experience-date">
+              date: {this.props.specificExperienceObject.date}
+            </div>
+
             <div className="specific-available-experience-price">
               price: {this.props.specificExperienceObject.price}
             </div>

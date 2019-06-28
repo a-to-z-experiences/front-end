@@ -99,11 +99,11 @@ class AvailableExperiences extends Component {
                   <div className="available-experience-title">
                     {availableExperiencesObject.title}
                   </div>
-                  <div className="available-experience-date">
-                    date: {availableExperiencesObject.date}
-                  </div>
                   <div className="available-experience-location">
                     location: {availableExperiencesObject.location}
+                  </div>
+                  <div className="available-experience-date">
+                    date: {availableExperiencesObject.date}
                   </div>
                 </div>
               </Link>

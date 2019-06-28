@@ -1,9 +1,39 @@
 import React, { Component } from "react";
+// import Button and other stuff from reactstrap component
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Container,
+  Row,
+  Col,
+  NavLink,
+  Alert
+} from "reactstrap";
+// importing link so I can link stuff
+import { Link } from "react-router-dom";
 // import connect to connect the action creators and props we want from reducer's state to component
+// import css file
+import "../css/login.scss";
 import { connect } from "react-redux";
 // import login and register action creators
 import { login, register } from "../actions";
-
+const loginStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: "880px",
+  minWidth: "800px"
+};
+const alertStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  maxWidth: "250px"
+};
 class Login extends Component {
   state = {
     credentials: {
@@ -13,33 +43,56 @@ class Login extends Component {
   };
   render() {
     return (
-      <div className="login">
-        <div className="register-login-title">Register/Login</div>
-        {this.props.error && <div className="error">{this.props.error}</div>}
-        {this.props.message && (
-          <div className="message">{this.props.message}</div>
-        )}
-        <form>
-          <input
-            name="username"
-            type="string"
-            placeholder="Enter username here"
-            value={this.state.credentials.username}
-            onChange={this.changeHandler}
-            required
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Enter password here"
-            value={this.state.credentials.password}
-            onChange={this.changeHandler}
-            required
-          />
-          <button onClick={this.loginHandler}>Login</button>
-          <button onClick={this.registerHandler}>Register</button>
-        </form>
-      </div>
+      <FormGroup style={loginStyle}>
+        <Container className="d-flex justify-content-center">
+          <Form>
+            <div className="login" style={alertStyle}>
+              {this.props.error && (
+                <Alert color="danger">{this.props.error}</Alert>
+              )}
+              {this.props.message && (
+                <Alert color="success">{this.props.message}</Alert>
+              )}
+            </div>
+            <div className="login-title">A to Z Experiences</div>
+            <FormGroup>
+              <Input
+                valid={this.state.credentials.username}
+                name="username"
+                type="string"
+                placeholder="username"
+                value={this.state.credentials.username}
+                onChange={this.changeHandler}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Input
+                valid={this.state.credentials.password}
+                name="password"
+                type="password"
+                placeholder="password"
+                value={this.state.credentials.password}
+                onChange={this.changeHandler}
+                required
+              />
+            </FormGroup>
+
+            <Button color="primary" block onClick={this.loginHandler}>
+              Login
+            </Button>
+
+            <Button color="warning" block onClick={this.registerHandler}>
+              Register
+            </Button>
+            <NavLink tag={Link} to="/available-experiences">
+              <div className="available-experiences-title">
+                View Available Experiences
+              </div>
+            </NavLink>
+          </Form>
+        </Container>
+      </FormGroup>
     );
   }
 

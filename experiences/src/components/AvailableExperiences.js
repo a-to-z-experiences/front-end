@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-// import getUserData action creator
-import { getUserRsvpedExperiencesData } from "../actions";
-// importing link so I can link divs
+// import getExperiencesData fn to Availableow us to match events with action objects that change the reducer's state that changes what we receive as props
+import { getAvailableExperiencesData } from "../actions";
+// import availableExperiences css file
+import "../css/availableExperiences.scss";
+// import link so you can link the divs to their individual ID pages,
 import { Link } from "react-router-dom";
 // import Buthrefn and other stuff from reactstrap component
-import "../css/home.scss";
 import {
   Button,
   Form,
@@ -25,7 +26,10 @@ import {
   UncontrolledDropdown,
   Dropdownhrefggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Toast,
+  ToastBody,
+  ToastHeader
 } from "reactstrap";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
@@ -36,35 +40,20 @@ const divNav = {
   margin: "0 auto",
   marginBottom: "20px"
 };
-class UserHome extends Component {
-  state = {
-    userRsvpedExperiencesDataArray: this.props.userRsvpedExperiencesDataArray
-  };
+class AvailableExperiences extends Component {
+  state = {};
   componentDidMount() {
-    this.props.getUserRsvpedExperiencesData(localStorage.getItem("user_id"));
-    // console.log(
-    //   "array within CDM: ",
-    //   this.state.userRsvpedExperiencesDataArray
-    // );
+    this.props.getAvailableExperiencesData();
   }
   render() {
-    // console.log(
-    //   "testing state property: ",
-    //   this.state.userRsvpedExperiencesDataArray
-    // );
-    // console.log("this is our data array: ",this.props.userRsvpedExperiencesDataArray)
     return (
-      <div className="user-home">
-        {this.props.error && <div className="error">{this.props.error}</div>}
-        {this.props.message && (
-          <div className="message">{this.props.message}</div>
-        )}
+      <div className="available-experiences-wrapper">
         <Navbar color="light" light expand="md" style={divNav}>
           <NavbarBrand tag={Link} to="/">
             Home
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
-            <NavItem>
+            <NavItem active>
               <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
@@ -95,24 +84,29 @@ class UserHome extends Component {
             </Button>
           </Nav>
         </Navbar>
-        <div className="rsvped-experiences">
-          <div className="upcoming-experiences-title">Upcoming Experiences</div>
-          {this.props.userRsvpedExperiencesDataArray.map(
-            userRsvpedExperienceObject => (
-              <div
-                className="rsvped-experience"
-                key={userRsvpedExperienceObject.id}
+        <div className="available-experiences">
+          <div className="available-experiences-title">
+            Available experiences
+          </div>
+          {this.props.availableExperiencesArray.map(
+            availableExperiencesObject => (
+              <Link
+                to={`/available-experiences/${availableExperiencesObject.id}`}
+                style={{ textDecoration: "none" }}
+                key={availableExperiencesObject.id}
               >
-                <div className="rsvped-experience-title">
-                  {userRsvpedExperienceObject.title}
+                <div className="available-experience">
+                  <div className="available-experience-title">
+                    {availableExperiencesObject.title}
+                  </div>
+                  <div className="available-experience-location">
+                    location: {availableExperiencesObject.location}
+                  </div>
+                  <div className="available-experience-date">
+                    date: {availableExperiencesObject.date}
+                  </div>
                 </div>
-                <div className="rsvped-experience-location">
-                  location: {userRsvpedExperienceObject.location}
-                </div>
-                <div className="rsvped-experience-date">
-                  date: {userRsvpedExperienceObject.date}
-                </div>
-              </div>
+              </Link>
             )
           )}
         </div>
@@ -126,19 +120,15 @@ class UserHome extends Component {
   };
 }
 
-// creating mapStateToProps fn that takes in state from reducers. We pass props to UserHome by utilizing the reducer's state
+// creating mapStateToProps fn that takes in state from reducers. We pass props to Login by utilizing the reducer's state
 const mapStateToProps = state => {
   return {
     error: state.error,
-    message: state.message,
-    userData: state.userData,
-    userId: state.userId,
-    userExperiences: state.userExperiences,
-    userRsvpedExperiencesDataArray: state.userRsvpedExperiencesDataArray
+    availableExperiencesArray: state.availableExperiencesArray
   };
 };
-// linking mapStateToProps, action creators to UserHome component
+// linking mapStateToProps, action creators to Login component
 export default connect(
   mapStateToProps,
-  { getUserRsvpedExperiencesData }
-)(UserHome);
+  { getAvailableExperiencesData }
+)(AvailableExperiences);

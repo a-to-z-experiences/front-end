@@ -25,6 +25,7 @@ import {
   DropdownItem
 } from "reactstrap";
 // import connect to connect the action creators and props we want from reducer's state to component
+import "../css/specificAvailableExperience.scss";
 import { connect } from "react-redux";
 import { getSpecificExperience, rsvpSpecificExperience } from "../actions";
 const divNav = {
@@ -70,35 +71,47 @@ class SpecificAvailableExperience extends Component {
                 </div>
               </NavLink>
             </NavItem>
-            <Button inline color="secondary" size="sm" onClick={this.logout}>
+            <Button
+              inline
+              color="secondary"
+              size="sm"
+              onClick={this.logout}
+            >
               Logout
             </Button>
           </Nav>
         </Navbar>
-        <div className="specific-available-experience">
-          <div className="specific-available-experience-title">
-            {this.props.specificExperienceObject.title}
+        <div className="specific-available-experiences">
+          <div className="specific-available-experience">
+            <div className="specific-available-experience-title">
+              {this.props.specificExperienceObject.title}
+            </div>
+            <div className="specific-available-experience-description">
+              {this.props.specificExperienceObject.description}
+            </div>
+            <div className="divider" />
+            <div className="specific-available-experience-date">
+              date: {this.props.specificExperienceObject.date}
+            </div>
+            <div className="specific-available-experience-location">
+              location: {this.props.specificExperienceObject.location}
+            </div>
+            <div className="specific-available-experience-price">
+              price: {this.props.specificExperienceObject.price}
+            </div>
+            {localStorage.getItem("token") && (
+              <div className="rsvp-button">
+                <Button color="success" size="sm" onClick={this.rsvp}>
+                  RSVP
+                </Button>
+              </div>
+            )}
+            <div className="back-button">
+              <Button color="info" size="sm" onClick={this.goBack}>
+                Back
+              </Button>
+            </div>
           </div>
-          <div className="specific-available-experience-description">
-            {this.props.specificExperienceObject.description}
-          </div>
-          <div className="specific-available-experience-date">
-            date: {this.props.specificExperienceObject.date}
-          </div>
-          <div className="specific-available-experience-location">
-            location: {this.props.specificExperienceObject.location}
-          </div>
-          <div className="specific-available-experience-price">
-            price: {this.props.specificExperienceObject.price}
-          </div>
-          {localStorage.getItem("token") && (
-            <Button color="success" size="sm" onClick={this.rsvp}>
-              RSVP
-            </Button>
-          )}
-          <Button color="info" size="sm" onClick={this.goBack}>
-            Back
-          </Button>
         </div>
       </div>
     );

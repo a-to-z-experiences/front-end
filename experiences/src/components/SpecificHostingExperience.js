@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getSpecificExperience, deleteSpecificExperience } from "../actions";
 // import Buthrefn and other stuff from reactstrap component
+import "../css/specificHostingExperience.scss";
 import {
   Button,
   Form,
@@ -89,28 +90,35 @@ class SpecificHostingExperiences extends Component {
               </Button>
             </Nav>
           </Navbar>
-          <div className="specific-hosting-experience">
-            <div className="specific-hosting-experience-title">
-              {this.props.specificExperienceObject.title}
+          <div className="specific-hosting-experiences">
+            <div className="specific-hosting-experience">
+              <div className="specific-hosting-experience-title">
+                {this.props.specificExperienceObject.title}
+              </div>
+              <div className="specific-hosting-experience-description">
+                {this.props.specificExperienceObject.description}
+              </div>
+              <div className="divider" />
+              <div className="specific-hosting-experience-location">
+                location: {this.props.specificExperienceObject.location}
+              </div>
+              <div className="specific-hosting-experience-date">
+                date: {this.props.specificExperienceObject.date}
+              </div>
+              <div className="specific-hosting-experience-price">
+                price: {this.props.specificExperienceObject.price}
+              </div>
+              <Link to={`/edit-experience/${specificExperienceId}`}>
+                <div className="edit-button">
+                  <Button color="info">Edit</Button>
+                </div>
+              </Link>
+              <div className="delete-button">
+                <Button color="danger" onClick={this.handleDelete}>
+                  Delete
+                </Button>
+              </div>
             </div>
-            <div className="specific-hosting-experience-description">
-              {this.props.specificExperienceObject.description}
-            </div>
-            <div className="specific-hosting-experience-location">
-              {this.props.specificExperienceObject.location}
-            </div>
-            <div className="specific-hosting-experience-date">
-              {this.props.specificExperienceObject.date}
-            </div>
-            <div className="specific-hosting-experience-price">
-              {this.props.specificExperienceObject.price}
-            </div>
-            <Link to={`/edit-experience/${specificExperienceId}`}>
-              <Button color="info">Edit</Button>
-            </Link>
-            <Button color="danger" onClick={this.handleDelete}>
-              Delete
-            </Button>
           </div>
         </div>
       );

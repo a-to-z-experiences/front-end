@@ -16,6 +16,8 @@ import {
 // importing link so I can link stuff
 import { Link } from "react-router-dom";
 // import connect to connect the action creators and props we want from reducer's state to component
+// import logo
+import logo from "../img/atoz_logo.png";
 // import css file
 import "../css/login.scss";
 import { connect } from "react-redux";
@@ -54,7 +56,9 @@ class Login extends Component {
                 <Alert color="success">{this.props.message}</Alert>
               )}
             </div>
-            <div className="login-title">A to Z Experiences</div>
+            <div className="logo">
+              <img src={logo} alt="Logo" />
+            </div>
             <FormGroup>
               <Input
                 valid={this.state.credentials.username}
@@ -86,7 +90,7 @@ class Login extends Component {
               Register
             </Button>
             <NavLink tag={Link} to="/available-experiences">
-              <div className="available-experiences-title">
+              <div className="available-experiences-link">
                 View Available Experiences
               </div>
             </NavLink>

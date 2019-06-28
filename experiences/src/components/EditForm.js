@@ -52,9 +52,7 @@ class EditForm extends Component {
       price: this.props.specificExperienceObject.price
     }
   };
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
   render() {
     // const specificExperienceId = this.props.match.experienceId;
     // const specificExperience =
@@ -104,7 +102,7 @@ class EditForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the title of your experience</FormText>
+                <FormText>Enter a title</FormText>
               </FormGroup>
 
               <FormGroup>
@@ -117,7 +115,7 @@ class EditForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the location of your experience</FormText>
+                <FormText>Enter a location</FormText>
               </FormGroup>
               <FormGroup>
                 <Input
@@ -129,7 +127,7 @@ class EditForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the date of your experience</FormText>
+                <FormText>Enter a date</FormText>
               </FormGroup>
               <FormGroup>
                 <Input
@@ -141,7 +139,7 @@ class EditForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the price of your experience</FormText>
+                <FormText>Enter a price</FormText>
               </FormGroup>
               <Button color="success" block>
                 Submit

@@ -30,6 +30,7 @@ import { Link } from "react-router-dom";
 import { postNewExperience } from "../actions";
 // import connect href connect the action creahrefrs and props we want from reducer's state href component
 import { connect } from "react-redux";
+import "../css/form.scss";
 const divNav = {
   display: "flex",
   alignItems: "center",
@@ -99,7 +100,8 @@ class ExperienceForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the title of your experience</FormText>
+
+                <FormText>Enter a title</FormText>
               </FormGroup>
 
               <FormGroup>
@@ -112,7 +114,7 @@ class ExperienceForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the location of your experience</FormText>
+                <FormText>Enter a location</FormText>
               </FormGroup>
               <FormGroup>
                 <Input
@@ -124,7 +126,7 @@ class ExperienceForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the date of your experience</FormText>
+                <FormText>Enter a date</FormText>
               </FormGroup>
               <FormGroup>
                 <Input
@@ -136,7 +138,7 @@ class ExperienceForm extends Component {
                   onChange={this.changeHandler}
                   required
                 />
-                <FormText>Enter the price of your experience</FormText>
+                <FormText>Enter a price</FormText>
               </FormGroup>
               <Button color="success" block>
                 Add Experience

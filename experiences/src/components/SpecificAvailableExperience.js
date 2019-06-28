@@ -50,7 +50,7 @@ class SpecificAvailableExperience extends Component {
             Home
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
-            <NavItem>
+            <NavItem active>
               <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences

@@ -11,9 +11,11 @@ import Login from "./components/Login";
 // importing AllExperiences which contain all the experiences inside the data.experiences array
 import AvailableExperiences from "./components/AvailableExperiences";
 // importing specificExperience which is the component that shows when you click on an experiencediv within allexperiences
-import SpecificExperience from "./components/SpecificExperience";
+import SpecificAttendingExperience from "./components/SpecificAttendingExperience";
 // importing PostedExperiences which shows all the experiences the user has posted/added
 import HostingExperiences from "./components/HostingExperiences";
+// import specifichostingexperience
+import SpecificHostingExperience from './components/SpecificHostingExperience'
 // import Form component
 import Form from "./components/Form";
 // css file at end
@@ -24,10 +26,25 @@ function App() {
     <div className="App">
       <Route path="/login" component={Login} />
       <PrivateRoute exact path="/" component={UserHome} />
-      <Route path="/available-experiences" component={AvailableExperiences} />
-      <Route path="/experiences/:experienceId" component={SpecificExperience} />
-      <PrivateRoute path="/hosting-experiences" component={HostingExperiences} />
-      <PrivateRoute path="/host-an-experience" component={Form} />
+      <Route
+        exact
+        path="/available-experiences"
+        component={AvailableExperiences}
+      />
+      <Route
+        path="/available-experiences/:experienceId"
+        component={SpecificAttendingExperience}
+      />
+      <PrivateRoute
+        exact
+        path="/hosting-experiences"
+        component={HostingExperiences}
+      />
+      <PrivateRoute
+        path="/hosting-experiences/:experienceId"
+        component={SpecificHostingExperience}
+      />
+      <PrivateRoute exact path="/host-an-experience" component={Form} />
       <PrivateRoute path="/edit-experience" component={Form} />
     </div>
   );

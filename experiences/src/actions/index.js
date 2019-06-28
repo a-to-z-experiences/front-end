@@ -85,7 +85,7 @@ export const login = credentials => dispatch => {
     .then(response => {
       console.log("LOGIN_SUCCESS_RESPONSE: ", response);
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user_id", response.data.user.id)
+      localStorage.setItem("user_id", response.data.user.id);
       dispatch({
         type: LOGIN_SUCCESS,
         message: response.data.message,
@@ -168,7 +168,9 @@ export const getUserHostingExperiencesData = userId => dispatch => {
   dispatch({ type: GET_USER_HOSTING_EXPERIENCES_DATA_START });
   // interpolating ID value because it's a number, and the URL we get from has to use a string value
   axios
-    .get(`https://atoz-backend.herokuapp.com/api/users/experiences/${userId}`)
+    .get(
+      `https://atoz-backend.herokuapp.com/api/users/${userId}/host_experiences`
+    )
     .then(response => {
       console.log("GET_USER_HOSTING_DATA_SUCCESS: ", response);
       dispatch({

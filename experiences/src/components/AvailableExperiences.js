@@ -74,7 +74,12 @@ class AvailableExperiences extends Component {
                 </div>
               </NavLink>
             </NavItem>
-            <Button inline color="secondary" size="sm" onClick={this.logout}>
+            <Button
+              inline="true"
+              color="secondary"
+              size="sm"
+              onClick={this.logout}
+            >
               Logout
             </Button>
           </Nav>
@@ -86,8 +91,9 @@ class AvailableExperiences extends Component {
           {this.props.availableExperiencesArray.map(
             availableExperiencesObject => (
               <Link
-                to={`/experiences/${availableExperiencesObject.id}`}
+                to={`/available-experiences/${availableExperiencesObject.id}`}
                 style={{ textDecoration: "none" }}
+                key={availableExperiencesObject.id}
               >
                 <div className="available-experience">
                   <div className="available-experience-title">

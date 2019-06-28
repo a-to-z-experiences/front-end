@@ -95,7 +95,7 @@ class ExperienceForm extends Component {
                   name="title"
                   type="string"
                   value={this.state.newExperience.title}
-                  placeholder="title..."
+                  placeholder="title"
                   onChange={this.changeHandler}
                   required
                 />
@@ -107,7 +107,7 @@ class ExperienceForm extends Component {
                   name="date"
                   type="string"
                   value={this.state.newExperience.date}
-                  placeholder="date..."
+                  placeholder="date"
                   onChange={this.changeHandler}
                   required
                 />
@@ -119,7 +119,7 @@ class ExperienceForm extends Component {
                   name="location"
                   type="string"
                   value={this.state.newExperience.location}
-                  placeholder="location..."
+                  placeholder="location"
                   onChange={this.changeHandler}
                   required
                 />
@@ -131,7 +131,7 @@ class ExperienceForm extends Component {
                   name="price"
                   type="string"
                   value={this.state.newExperience.price}
-                  placeholder="price..."
+                  placeholder="price"
                   onChange={this.changeHandler}
                   required
                 />
@@ -147,12 +147,13 @@ class ExperienceForm extends Component {
     );
   }
   changeHandler = event => {
+    const userId = localStorage.getItem("user_id");
     event.preventDefault();
     this.setState({
       ...this.state,
       newExperience: {
         ...this.state.newExperience,
-        user_id: this.props.userId,
+        user_id: userId,
         [event.target.name]: event.target.value
       }
     });

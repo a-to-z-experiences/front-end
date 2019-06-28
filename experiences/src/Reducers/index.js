@@ -9,9 +9,9 @@ import {
   GET_USER_DATA_START,
   GET_USER_DATA_SUCCESS,
   GET_USER_DATA_FAILURE,
-  GET_USER_EXPERIENCES_DATA_START,
-  GET_USER_EXPERIENCES_DATA_SUCCESS,
-  GET_USER_EXPERIENCES_DATA_FAILURE,
+  GET_USER_RSVPED_EXPERIENCES_DATA_START,
+  GET_USER_RSVPED_EXPERIENCES_DATA_SUCCESS,
+  GET_USER_RSVPED_EXPERIENCES_DATA_FAILURE,
   GET_USER_HOSTING_EXPERIENCES_DATA_START,
   GET_USER_HOSTING_EXPERIENCES_DATA_SUCCESS,
   GET_USER_HOSTING_EXPERIENCES_DATA_FAILURE,
@@ -24,6 +24,9 @@ import {
   GET_SPECIFIC_EXPERIENCE_DATA_START,
   GET_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
   GET_SPECIFIC_EXPERIENCE_DATA_FAILURE,
+  RSVP_SPECIFIC_EXPERIENCE_START,
+  RSVP_SPECIFIC_EXPERIENCE_SUCCESS,
+  RSVP_SPECIFIC_EXPERIENCE_FAILURE,
   UPDATE_SPECIFIC_EXPERIENCE_DATA_START,
   UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS,
   UPDATE_SPECIFIC_EXPERIENCE_DATA_FAILURE,
@@ -36,15 +39,16 @@ const initialState = {
   loggingIn: false,
   registering: false,
   gettingUserData: false,
-  gettingUserExperiencesData: false,
+  gettingUserRsvpedExperiencesData: false,
   gettingUserHostingExperiencesData: false,
   gettingExperiencesData: false,
   postingNewExperienceData: false,
   gettingSpecificExperienceData: false,
   updatingSpecificExperienceData: false,
   deletingSpecificExperienceData: false,
+  rsvping: false,
   userData: {},
-  userExperiences: [],
+  userRsvpedExperiencesDataArray: [],
   userHostingExperiencesDataArray: [],
   userId: -1,
   availableExperiencesArray: [],
@@ -123,27 +127,27 @@ export const rootReducer = (state = initialState, action) => {
         error: action.error,
         message: ""
       };
-    case GET_USER_EXPERIENCES_DATA_START:
+    case GET_USER_RSVPED_EXPERIENCES_DATA_START:
       return {
         ...state,
-        gettingUserExperiencesData: true,
-        error: "",
-        message: ""
-      };
-    case GET_USER_EXPERIENCES_DATA_SUCCESS:
-      return {
-        ...state,
-        gettingUserExperiencesData: false,
         error: "",
         message: "",
-        userExperiencesDataArray: action.payload
+        gettingUserRsvpedExperiencesData: true
       };
-    case GET_USER_EXPERIENCES_DATA_FAILURE:
+    case GET_USER_RSVPED_EXPERIENCES_DATA_SUCCESS:
+      return {
+        ...state,
+        error: "",
+        message: "",
+        gettingUserRsvpedExperiencesData: false,
+        userRsvpedExperiencesDataArray: action.userRsvpedExperiencesDataArray
+      };
+    case GET_USER_RSVPED_EXPERIENCES_DATA_FAILURE:
       return {
         ...state,
         error: action.error,
         message: "",
-        gettingUserExperiencesData: false
+        gettingUserRsvpedExperiencesData: false
       };
     case GET_USER_HOSTING_EXPERIENCES_DATA_START:
       return {
@@ -233,6 +237,27 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         gettingSpecificExperienceData: true,
         error: action.error,
+        message: ""
+      };
+    case RSVP_SPECIFIC_EXPERIENCE_START:
+      return {
+        ...state,
+        rsvping: true,
+        error: "",
+        message: ""
+      };
+    case RSVP_SPECIFIC_EXPERIENCE_SUCCESS:
+      return {
+        ...state,
+        rsvping: false,
+        error: "",
+        message: ""
+      };
+    case RSVP_SPECIFIC_EXPERIENCE_FAILURE:
+      return {
+        ...state,
+        rsvping: false,
+        error: "",
         message: ""
       };
     case UPDATE_SPECIFIC_EXPERIENCE_DATA_START:

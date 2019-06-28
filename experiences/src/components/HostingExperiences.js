@@ -41,10 +41,10 @@ class HostingExperiences extends Component {
     // filteredUserHostingExperiencesDataArray: {}
   };
   componentDidMount() {
-    this.props.getUserHostingExperiencesData(this.props.userId);
+    this.props.getUserHostingExperiencesData(localStorage.getItem("user_id"));
   }
   render() {
-    console.log("hostingarray: ", this.props.userHostingExperiencesDataArray);
+    // console.log("hostingarray: ", this.props.userHostingExperiencesDataArray);
     if (!this.props.userHostingExperiencesDataArray) {
       return <Spinner color="info" />;
     } else
@@ -63,7 +63,7 @@ class HostingExperiences extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink active tag={Link} to="/hosting-experiences">
+                <NavLink tag={Link} to="/hosting-experiences">
                   <div className="hosting-experiences-title">
                     Experiences I'm Hosting
                   </div>
@@ -76,6 +76,9 @@ class HostingExperiences extends Component {
                   </div>
                 </NavLink>
               </NavItem>
+              <Button inline color="secondary" size="sm" onClick={this.logout}>
+                Logout
+              </Button>
             </Nav>
           </Navbar>
           {this.props.userHostingExperiencesDataArray.map(
@@ -86,6 +89,11 @@ class HostingExperiences extends Component {
         </div>
       );
   }
+  logout = event => {
+    event.preventDefault();
+    localStorage.clear();
+    this.props.history.push("/");
+  };
 }
 // creating mapStateToProps fn that takes in state from reducers. We pass props to component by utilizing the reducer's state
 const mapStateToProps = state => {

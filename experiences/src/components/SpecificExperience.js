@@ -26,7 +26,7 @@ import {
 } from "reactstrap";
 // import connect to connect the action creators and props we want from reducer's state to component
 import { connect } from "react-redux";
-import { getSpecificExperience } from "../actions";
+import { getSpecificExperience, rsvpSpecificExperience } from "../actions";
 const divNav = {
   display: "flex",
   alignItems: "center",
@@ -34,6 +34,7 @@ const divNav = {
   margin: "0 auto",
   marginBottom: "20px"
 };
+
 class SpecificExperience extends Component {
   state = {};
   componentDidMount() {
@@ -49,7 +50,7 @@ class SpecificExperience extends Component {
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink active tag={Link} to="/available-experiences">
+              <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
                 </div>
@@ -69,6 +70,9 @@ class SpecificExperience extends Component {
                 </div>
               </NavLink>
             </NavItem>
+            <Button inline color="secondary" size="sm" onClick={this.logout}>
+              Logout
+            </Button>
           </Nav>
         </Navbar>
         <div className="specific-experience">
@@ -88,7 +92,7 @@ class SpecificExperience extends Component {
             {this.props.specificExperienceObject.price}
           </div>
           {localStorage.getItem("token") && (
-            <Button color="success" size="sm">
+            <Button color="success" size="sm" onClick={this.rsvp}>
               RSVP
             </Button>
           )}
@@ -99,9 +103,23 @@ class SpecificExperience extends Component {
       </div>
     );
   }
+  rsvp = event => {
+    const specificExperienceId = this.props.match.params.experienceId;
+    event.preventDefault();
+    this.props
+      .rsvpSpecificExperience(this.props.userId, specificExperienceId)
+      .then(response => {
+        this.props.history.push("/");
+      });
+  };
   goBack = event => {
     event.preventDefault();
     this.props.history.push("/available-experiences");
+  };
+  logout = event => {
+    event.preventDefault();
+    localStorage.clear();
+    this.props.history.push("/");
   };
 }
 
@@ -110,6 +128,7 @@ const mapStateToProps = state => {
   return {
     error: state.error,
     message: state.message,
+    userId: state.userId,
     specificExperienceObject: state.specificExperienceObject,
     specificExperienceId: state.specificExperienceId
   };
@@ -117,5 +136,5 @@ const mapStateToProps = state => {
 // linking mapStateToProps, action creators to SpecificExperience component
 export default connect(
   mapStateToProps,
-  { getSpecificExperience }
+  { getSpecificExperience, rsvpSpecificExperience }
 )(SpecificExperience);

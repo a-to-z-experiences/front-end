@@ -16,12 +16,12 @@ export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
 export const GET_USER_DATA_FAILURE = "GET_USER_DATA_FAILURE";
 
 // creating getUserExperiencesData variables for action types
-export const GET_USER_EXPERIENCES_DATA_START =
-  "GET_USER_EXPERIENCES_DATA_START";
-export const GET_USER_EXPERIENCES_DATA_SUCCESS =
-  "GET_USER_EXPERIENCES_DATA_SUCCESS";
-export const GET_USER_EXPERIENCES_DATA_FAILURE =
-  "GET_USER_EXPERIENCES_DATA_FAILURE";
+export const GET_USER_RSVPED_EXPERIENCES_DATA_START =
+  "GET_USER_RSVPED_EXPERIENCES_DATA_START";
+export const GET_USER_RSVPED_EXPERIENCES_DATA_SUCCESS =
+  "GET_USER_RSVPED_EXPERIENCES_DATA_SUCCESS";
+export const GET_USER_RSVPED_EXPERIENCES_DATA_FAILURE =
+  "GET_USER_RSVPED_EXPERIENCES_DATA_FAILURE";
 
 // creating getUserHostingExperiencesData variables for action types
 export const GET_USER_HOSTING_EXPERIENCES_DATA_START =
@@ -62,6 +62,13 @@ export const UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS =
 export const UPDATE_SPECIFIC_EXPERIENCE_DATA_FAILURE =
   "UPDATE_SPECIFIC_EXPERIENCE_DATA_FAILURE";
 
+// creating RSVP to Specific Experience
+export const RSVP_SPECIFIC_EXPERIENCE_START = "RSVP_SPECIFIC_EXPERIENCE_START";
+export const RSVP_SPECIFIC_EXPERIENCE_SUCCESS =
+  "RSVP_SPECIFIC_EXPERIENCE_SUCCESS";
+export const RSVP_SPECIFIC_EXPERIENCE_FAILURE =
+  "RSVP_SPECIFIC_EXPERIENCE_FAILURE";
+
 // creating GET_SPECIFIC_EXPERIENCES variables for action types
 export const DELETE_SPECIFIC_EXPERIENCE_DATA_START =
   "DELETE_SPECIFIC_EXPERIENCE_DATA_START";
@@ -78,6 +85,7 @@ export const login = credentials => dispatch => {
     .then(response => {
       console.log("LOGIN_SUCCESS_RESPONSE: ", response);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user_id", response.data.user.id)
       dispatch({
         type: LOGIN_SUCCESS,
         message: response.data.message,
@@ -131,23 +139,25 @@ export const getUserData = id => dispatch => {
     });
 };
 
-// creating getUserExperiences action creator, takes in ID of user
-export const getUserExperiencesData = userId => dispatch => {
-  dispatch({ type: GET_USER_EXPERIENCES_DATA_START });
+// creating getUserRSVPExperiences action creator, takes in ID of user
+export const getUserRsvpedExperiencesData = userId => dispatch => {
+  dispatch({ type: GET_USER_RSVPED_EXPERIENCES_DATA_START });
   // interpolating ID value because it's a number, and the URL we get from has to use a string value
   axios
-    .get(`https://atoz-backend.herokuapp.com/api/users/experiences/${userId}`)
+    .get(
+      `https://atoz-backend.herokuapp.com/api/users/${userId}/experiences_attending`
+    )
     .then(response => {
-      console.log("GET_USER_DATA_SUCCESS: ", response);
+      console.log("GET_USER_RSVPED_DATA_SUCCESS: ", response);
       dispatch({
-        type: GET_USER_EXPERIENCES_DATA_START,
-        userExperiencesDataArray: response.data
+        type: GET_USER_RSVPED_EXPERIENCES_DATA_SUCCESS,
+        userRsvpedExperiencesDataArray: response.data
       });
     })
     .catch(error => {
-      console.log("GET_USER_DATA_FAILURE: ", error);
+      console.log("GET_USER_RSVPED_DATA_FAILURE: ", error);
       dispatch({
-        type: GET_USER_EXPERIENCES_DATA_FAILURE,
+        type: GET_USER_RSVPED_EXPERIENCES_DATA_FAILURE,
         error: error.message
       });
     });
@@ -242,6 +252,21 @@ export const getSpecificExperience = experienceID => dispatch => {
         type: GET_SPECIFIC_EXPERIENCE_DATA_FAILURE,
         error: error.message
       });
+    });
+};
+
+// creating rsvpSpecificExperience action creator
+export const rsvpSpecificExperience = (userId, experienceId) => dispatch => {
+  dispatch({ type: RSVP_SPECIFIC_EXPERIENCE_START });
+  return axios
+    .post("https://atoz-backend.herokuapp.com/api/experiences/attend")
+    .then(response => {
+      console.log("RSVP_SPECIFIC_EXPERIENCE_SUCCESS", response);
+      dispatch({ type: RSVP_SPECIFIC_EXPERIENCE_SUCCESS });
+    })
+    .catch(error => {
+      console.log("RSVP_SPECIFIC_EXPERIENCE_FAILURE", error);
+      dispatch({ type: RSVP_SPECIFIC_EXPERIENCE_FAILURE });
     });
 };
 

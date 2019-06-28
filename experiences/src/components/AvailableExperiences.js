@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 // import getExperiencesData fn to Availableow us to match events with action objects that change the reducer's state that changes what we receive as props
 import { getAvailableExperiencesData } from "../actions";
+// import availableExperiences css file
+import "../css/availableExperiences.scss";
 // import link so you can link the divs to their individual ID pages,
 import { Link } from "react-router-dom";
 // import Buthrefn and other stuff from reactstrap component
@@ -52,7 +54,7 @@ class AvailableExperiences extends Component {
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink active tag={Link} to="/available-experiences">
+              <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
                 </div>
@@ -72,32 +74,44 @@ class AvailableExperiences extends Component {
                 </div>
               </NavLink>
             </NavItem>
+            <Button inline color="secondary" size="sm" onClick={this.logout}>
+              Logout
+            </Button>
           </Nav>
         </Navbar>
         <div className="available-experiences">
           <div className="available-experiences-title">
             Available experiences
           </div>
-          {this.props.availableExperiencesArray.map(experienceObject => (
-            <div className="experience" key={experienceObject.id}>
-              <Toast>
-                <ToastHeader>{experienceObject.title}</ToastHeader>
-                <ToastBody>
-                  <div>{experienceObject.date}</div>
-                  <div>{experienceObject.location}</div>
-                </ToastBody>
-                <NavLink tag={Link} to={`/experiences/${experienceObject.id}`}>
-                  <Button color="primary" size="sm">
-                    Details
-                  </Button>
-                </NavLink>
-              </Toast>
-            </div>
-          ))}
+          {this.props.availableExperiencesArray.map(
+            availableExperiencesObject => (
+              <Link
+                to={`/experiences/${availableExperiencesObject.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="available-experience">
+                  <div className="available-experience-title">
+                    {availableExperiencesObject.title}
+                  </div>
+                  <div className="available-experience-date">
+                    {availableExperiencesObject.date}
+                  </div>
+                  <div className="available-experience-location">
+                    {availableExperiencesObject.location}
+                  </div>
+                </div>
+              </Link>
+            )
+          )}
         </div>
       </div>
     );
   }
+  logout = event => {
+    event.preventDefault();
+    localStorage.clear();
+    this.props.history.push("/");
+  };
 }
 
 // creating mapStateToProps fn that takes in state from reducers. We pass props to Login by utilizing the reducer's state

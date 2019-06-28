@@ -75,12 +75,15 @@ class ExperienceForm extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink active tag={Link} to="/host-an-experience">
+              <NavLink tag={Link} to="/host-an-experience">
                 <div className="host-an-experience-title">
                   Host an experience
                 </div>
               </NavLink>
             </NavItem>
+            <Button inline color="secondary" size="sm" onClick={this.logout}>
+              Logout
+            </Button>
           </Nav>
         </Navbar>
         <Container className="d-flex justify-content-center">
@@ -169,6 +172,11 @@ class ExperienceForm extends Component {
         price: ""
       }
     });
+  };
+  logout = event => {
+    event.preventDefault();
+    localStorage.clear();
+    this.props.history.push("/");
   };
 }
 

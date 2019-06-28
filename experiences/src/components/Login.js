@@ -16,6 +16,8 @@ import {
 // importing link so I can link stuff
 import { Link } from "react-router-dom";
 // import connect to connect the action creators and props we want from reducer's state to component
+// import css file
+import "../css/login.scss";
 import { connect } from "react-redux";
 // import login and register action creators
 import { login, register } from "../actions";
@@ -52,12 +54,13 @@ class Login extends Component {
                 <Alert color="success">{this.props.message}</Alert>
               )}
             </div>
+            <div className="login-title">A to Z Experiences</div>
             <FormGroup>
               <Input
                 valid={this.state.credentials.username}
                 name="username"
                 type="string"
-                placeholder="Enter username here"
+                placeholder="username"
                 value={this.state.credentials.username}
                 onChange={this.changeHandler}
                 required
@@ -68,7 +71,7 @@ class Login extends Component {
                 valid={this.state.credentials.password}
                 name="password"
                 type="password"
-                placeholder="Enter password here"
+                placeholder="password"
                 value={this.state.credentials.password}
                 onChange={this.changeHandler}
                 required

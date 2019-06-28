@@ -53,7 +53,7 @@ class AvailableExperiences extends Component {
             Home
           </NavbarBrand>
           <Nav className="ml-auto" navbar>
-            <NavItem>
+            <NavItem active>
               <NavLink tag={Link} to="/available-experiences">
                 <div className="available-experiences-title">
                   Available Experiences
@@ -100,10 +100,10 @@ class AvailableExperiences extends Component {
                     {availableExperiencesObject.title}
                   </div>
                   <div className="available-experience-date">
-                    {availableExperiencesObject.date}
+                    date: {availableExperiencesObject.date}
                   </div>
                   <div className="available-experience-location">
-                    {availableExperiencesObject.location}
+                    location: {availableExperiencesObject.location}
                   </div>
                 </div>
               </Link>

@@ -69,7 +69,7 @@ class EditForm extends Component {
                 </div>
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem active>
               <NavLink tag={Link} to="/hosting-experiences">
                 <div className="hosting-experiences-title">
                   Experiences I'm Hosting
@@ -93,7 +93,7 @@ class EditForm extends Component {
             <Form onSubmit={this.updateHandler}>
               <FormGroup>
                 <Input
-                  //   valid={this.props.updatedExperience.title}
+                  valid={this.state.updatedExperience.title}
                   name="title"
                   type="string"
                   value={this.state.updatedExperience.title}
@@ -105,7 +105,7 @@ class EditForm extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
-                  //   valid={this.props.specificExperienceObject.date}
+                  valid={this.state.updatedExperience.date}
                   name="date"
                   type="string"
                   value={this.state.updatedExperience.date}
@@ -117,7 +117,7 @@ class EditForm extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
-                  //   valid={this.props.specificExperienceObject.location}
+                  valid={this.state.updatedExperience.location}
                   name="location"
                   type="string"
                   value={this.state.updatedExperience.location}
@@ -129,7 +129,7 @@ class EditForm extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
-                  //   valid={this.props.specificExperienceObject.price}
+                  valid={this.state.updatedExperience.price}
                   name="price"
                   type="string"
                   value={this.state.updatedExperience.price}
@@ -163,7 +163,10 @@ class EditForm extends Component {
   updateHandler = event => {
     event.preventDefault();
     this.props
-      .updateSpecificExperience(this.props.specificExperienceObject.id, this.state.updatedExperience)
+      .updateSpecificExperience(
+        this.props.specificExperienceObject.id,
+        this.state.updatedExperience
+      )
       .then(response => {
         this.props.history.push("/hosting-experiences");
       });

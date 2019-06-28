@@ -74,7 +74,7 @@ class ExperienceForm extends Component {
                 </div>
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem active>
               <NavLink tag={Link} to="/host-an-experience">
                 <div className="host-an-experience-title">
                   Host an experience

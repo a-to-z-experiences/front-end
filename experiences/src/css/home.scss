@@ -1,0 +1,21 @@
+.rsvped-experiences {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  .rsvped-experience {
+    text-align: left;
+    width: 250px;
+    font-size: 0.875rem;
+    background-color: rgba(255, 255, 255, 0.85);
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    .rsvped-experience-title {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  }
+}

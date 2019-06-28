@@ -82,14 +82,14 @@ class SpecificAvailableExperience extends Component {
           <div className="specific-available-experience-description">
             {this.props.specificExperienceObject.description}
           </div>
-          <div className="specific-available-experience-dates">
-            {this.props.specificExperienceObject.dates}
+          <div className="specific-available-experience-date">
+            date: {this.props.specificExperienceObject.date}
           </div>
           <div className="specific-available-experience-location">
-            {this.props.specificExperienceObject.location}
+            location: {this.props.specificExperienceObject.location}
           </div>
           <div className="specific-available-experience-price">
-            {this.props.specificExperienceObject.price}
+            price: {this.props.specificExperienceObject.price}
           </div>
           {localStorage.getItem("token") && (
             <Button color="success" size="sm" onClick={this.rsvp}>

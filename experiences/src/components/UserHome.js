@@ -4,6 +4,7 @@ import { getUserRsvpedExperiencesData } from "../actions";
 // importing link so I can link divs
 import { Link } from "react-router-dom";
 // import Buthrefn and other stuff from reactstrap component
+import "../css/home.scss";
 import {
   Button,
   Form,
@@ -94,19 +95,27 @@ class UserHome extends Component {
             </Button>
           </Nav>
         </Navbar>
-        <div className="upcoming-experiences-title">Upcoming Experiences</div>
-        {this.props.userRsvpedExperiencesDataArray.map(
-          userRsvpedExperienceObject => (
-            <div
-              className="rsvped-experience"
-              key={userRsvpedExperienceObject.id}
-            >
-              <div>{userRsvpedExperienceObject.title}</div>
-              <div>{userRsvpedExperienceObject.date}</div>
-              <div>{userRsvpedExperienceObject.location}</div>
-            </div>
-          )
-        )}
+        <div className="rsvped-experiences">
+          <div className="upcoming-experiences-title">Upcoming Experiences</div>
+          {this.props.userRsvpedExperiencesDataArray.map(
+            userRsvpedExperienceObject => (
+              <div
+                className="rsvped-experience"
+                key={userRsvpedExperienceObject.id}
+              >
+                <div className="rsvped-experience-title">
+                  {userRsvpedExperienceObject.title}
+                </div>
+                <div className="rsvped-experience-date">
+                  date: {userRsvpedExperienceObject.date}
+                </div>
+                <div className="rsvped-experience-location">
+                  location: {userRsvpedExperienceObject.location}
+                </div>
+              </div>
+            )
+          )}
+        </div>
       </div>
     );
   }

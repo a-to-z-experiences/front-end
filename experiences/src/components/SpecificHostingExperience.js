@@ -57,7 +57,7 @@ class SpecificHostingExperiences extends Component {
       return <Spinner color="info" />;
     } else
       return (
-        <div className="hosting-experiences">
+        <div className="specific-hosting-experiences-wrapper">
           <Navbar color="light" light expand="md" style={divNav}>
             <NavbarBrand tag={Link} to="/">
               Home
@@ -70,7 +70,7 @@ class SpecificHostingExperiences extends Component {
                   </div>
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem active>
                 <NavLink tag={Link} to="/hosting-experiences">
                   <div className="hosting-experiences-title">
                     Experiences I'm Hosting

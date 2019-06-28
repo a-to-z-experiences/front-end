@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getUserHostingExperiencesData } from "../actions";
 // import Buthrefn and other stuff from reactstrap component
+import "../css/hostingExperiences.scss";
 import {
   Button,
   Form,
@@ -49,7 +50,7 @@ class HostingExperiences extends Component {
       return <Spinner color="info" />;
     } else
       return (
-        <div className="hosting-experiences">
+        <div className="hosting-experiences-wrapper">
           <Navbar color="light" light expand="md" style={divNav}>
             <NavbarBrand tag={Link} to="/">
               Home
@@ -62,7 +63,7 @@ class HostingExperiences extends Component {
                   </div>
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem active>
                 <NavLink tag={Link} to="/hosting-experiences">
                   <div className="hosting-experiences-title">
                     Experiences I'm Hosting
@@ -81,27 +82,30 @@ class HostingExperiences extends Component {
               </Button>
             </Nav>
           </Navbar>
-          {this.props.userHostingExperiencesDataArray.map(
-            hostingExperienceObj => (
-              <Link
-                to={`/hosting-experiences/${hostingExperienceObj.id}`}
-                style={{ textDecoration: "none" }}
-                key={hostingExperienceObj.id}
-              >
-                <div className="hosting-experience">
-                  <div className="hosting-experience-title">
-                    {hostingExperienceObj.title}
+          <div className="hosting-experiences">
+            <div className="hosting-experiences-title">Experiences to Host</div>
+            {this.props.userHostingExperiencesDataArray.map(
+              hostingExperienceObj => (
+                <Link
+                  to={`/hosting-experiences/${hostingExperienceObj.id}`}
+                  style={{ textDecoration: "none" }}
+                  key={hostingExperienceObj.id}
+                >
+                  <div className="hosting-experience">
+                    <div className="hosting-experience-title">
+                      {hostingExperienceObj.title}
+                    </div>
+                    <div className="hosting-experience-date">
+                      date: {hostingExperienceObj.date}
+                    </div>
+                    <div className="hosting-experience-location">
+                      location: {hostingExperienceObj.location}
+                    </div>
                   </div>
-                  <div className="hosting-experience-date">
-                    {hostingExperienceObj.date}
-                  </div>
-                  <div className="hosting-experience-location">
-                    {hostingExperienceObj.location}
-                  </div>
-                </div>
-              </Link>
-            )
-          )}
+                </Link>
+              )
+            )}
+          </div>
         </div>
       );
   }

@@ -261,8 +261,12 @@ export const getSpecificExperience = experienceID => dispatch => {
 export const rsvpSpecificExperience = (userId, experienceId) => dispatch => {
   dispatch({ type: RSVP_SPECIFIC_EXPERIENCE_START });
   return axios
-    .post("https://atoz-backend.herokuapp.com/api/experiences/attend")
+    .post("https://atoz-backend.herokuapp.com/api/experiences/attend", {
+      user_id: userId,
+      experience_id: experienceId
+    })
     .then(response => {
+      // getUserRsvpedExperiencesData(localStorage.getItem("user_id"));
       console.log("RSVP_SPECIFIC_EXPERIENCE_SUCCESS", response);
       dispatch({ type: RSVP_SPECIFIC_EXPERIENCE_SUCCESS });
     })
@@ -273,11 +277,17 @@ export const rsvpSpecificExperience = (userId, experienceId) => dispatch => {
 };
 
 // creating updateSpecificExperience action creator
-export const updateSpecificExperience = experienceID => dispatch => {
+export const updateSpecificExperience = (
+  experienceID,
+  updatedExperience
+) => dispatch => {
   dispatch({ type: UPDATE_SPECIFIC_EXPERIENCE_DATA_START });
   // get cAVAILABLE to /experiences endpoint
-  axios
-    .put(`https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`)
+  return axios
+    .put(
+      `https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`,
+      updatedExperience
+    )
     .then(response => {
       console.log("UPDATE_SPECIFIC_EXPERIENCE_DATA_SUCCESS: ", response);
       dispatch({
@@ -300,7 +310,7 @@ export const updateSpecificExperience = experienceID => dispatch => {
 export const deleteSpecificExperience = experienceID => dispatch => {
   dispatch({ type: DELETE_SPECIFIC_EXPERIENCE_DATA_START });
   // get cAVAILABLE to /experiences endpoint
-  axios
+  return axios
     .delete(
       `https://atoz-backend.herokuapp.com/api/experiences/${experienceID}`
     )

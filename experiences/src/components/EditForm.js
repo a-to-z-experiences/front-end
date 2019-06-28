@@ -27,7 +27,7 @@ import {
 // import link
 import { Link } from "react-router-dom";
 // import postNewExperience action creahrefr
-import { postNewExperience } from "../actions";
+import { updateSpecificExperience } from "../actions";
 // import connect href connect the action creahrefrs and props we want from reducer's state href component
 import { connect } from "react-redux";
 const divNav = {
@@ -43,16 +43,18 @@ const divNav = {
 //   minHeight: "880px",
 //   maxWidth: "800px"
 // };
-class ExperienceForm extends Component {
+class EditForm extends Component {
   state = {
-    newExperience: {
-      title: "",
-      date: "",
-      location: "",
-      price: ""
+    updatedExperience: {
+      title: this.props.specificExperienceObject.title,
+      date: this.props.specificExperienceObject.date,
+      location: this.props.specificExperienceObject.location,
+      price: this.props.specificExperienceObject.price
     }
   };
   render() {
+    // const specificExperienceId = this.props.match.experienceId;
+    // const specificExperience =
     return (
       <div>
         <Navbar color="light" light expand="md" style={divNav}>
@@ -88,13 +90,13 @@ class ExperienceForm extends Component {
         </Navbar>
         <Container className="d-flex justify-content-center">
           <div className="form">
-            <Form onSubmit={this.hostNewExperienceHandler}>
+            <Form onSubmit={this.updateHandler}>
               <FormGroup>
                 <Input
-                  valid={this.state.newExperience.title}
+                  //   valid={this.props.updatedExperience.title}
                   name="title"
                   type="string"
-                  value={this.state.newExperience.title}
+                  value={this.state.updatedExperience.title}
                   placeholder="title"
                   onChange={this.changeHandler}
                   required
@@ -103,10 +105,10 @@ class ExperienceForm extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
-                  valid={this.state.newExperience.date}
+                  //   valid={this.props.specificExperienceObject.date}
                   name="date"
                   type="string"
-                  value={this.state.newExperience.date}
+                  value={this.state.updatedExperience.date}
                   placeholder="date"
                   onChange={this.changeHandler}
                   required
@@ -115,10 +117,10 @@ class ExperienceForm extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
-                  valid={this.state.newExperience.location}
+                  //   valid={this.props.specificExperienceObject.location}
                   name="location"
                   type="string"
-                  value={this.state.newExperience.location}
+                  value={this.state.updatedExperience.location}
                   placeholder="location"
                   onChange={this.changeHandler}
                   required
@@ -127,10 +129,10 @@ class ExperienceForm extends Component {
               </FormGroup>
               <FormGroup>
                 <Input
-                  valid={this.state.newExperience.price}
+                  //   valid={this.props.specificExperienceObject.price}
                   name="price"
                   type="string"
-                  value={this.state.newExperience.price}
+                  value={this.state.updatedExperience.price}
                   placeholder="price"
                   onChange={this.changeHandler}
                   required
@@ -138,7 +140,7 @@ class ExperienceForm extends Component {
                 <FormText>Enter the price of your experience</FormText>
               </FormGroup>
               <Button color="success" block>
-                Add Experience
+                Submit
               </Button>
             </Form>
           </div>
@@ -147,26 +149,28 @@ class ExperienceForm extends Component {
     );
   }
   changeHandler = event => {
-    const userId = localStorage.getItem("user_id");
+    // const userId = localStorage.getItem("user_id");
     event.preventDefault();
     this.setState({
       ...this.state,
-      newExperience: {
-        ...this.state.newExperience,
-        user_id: userId,
+      updatedExperience: {
+        ...this.state.updatedExperience,
+        // user_id: userId,
         [event.target.name]: event.target.value
       }
     });
   };
-  hostNewExperienceHandler = event => {
+  updateHandler = event => {
     event.preventDefault();
-    this.props.postNewExperience(this.state.newExperience).then(response => {
-      this.props.history.push("/hosting-experiences");
-    });
+    this.props
+      .updateSpecificExperience(this.props.specificExperienceObject.id, this.state.updatedExperience)
+      .then(response => {
+        this.props.history.push("/hosting-experiences");
+      });
     this.setState({
       ...this.state,
-      newExperience: {
-        ...this.state.newExperience,
+      updatedExperience: {
+        ...this.state.updatedExperience,
         title: "",
         dates: "",
         location: "",
@@ -187,7 +191,8 @@ const mapStateToProps = state => {
     error: state.error,
     message: state.message,
     // userData: state.userData,
-    userId: state.userId
+    userId: state.userId,
+    specificExperienceObject: state.specificExperienceObject
     // userExperiences: state.userExperiences
   };
 };
@@ -195,5 +200,5 @@ const mapStateToProps = state => {
 // NavLinking mapStatehrefProps, action creahrefrs href Form component
 export default connect(
   mapStateToProps,
-  { postNewExperience }
-)(ExperienceForm);
+  { updateSpecificExperience }
+)(EditForm);

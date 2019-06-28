@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import link so you can link stuff
 import { Link } from "react-router-dom";
-import { getUserHostingExperiencesData } from "../actions";
+import { getSpecificExperience, deleteSpecificExperience } from "../actions";
 // import Buthrefn and other stuff from reactstrap component
 import {
   Button,
@@ -39,13 +39,21 @@ class SpecificHostingExperiences extends Component {
   state = {
     // userHostingExperiencesDataArray: this.props.userHostingExperiencesDataArray,
     // filteredUserHostingExperiencesDataArray: {}
+    // updatedExperience: {
+    //   title: this.props.specificExperienceObject.title,
+    //   date: this.props.specificExperienceObject.date,
+    //   location: this.props.specificExperienceObject.location,
+    //   price: this.props.specificExperienceObject.price
+    // }
   };
   componentDidMount() {
-    this.props.getUserHostingExperiencesData(localStorage.getItem("user_id"));
+    const specificExperienceId = this.props.match.params.experienceId;
+    this.props.getSpecificExperience(specificExperienceId);
   }
   render() {
+    const specificExperienceId = this.props.match.params.experienceId;
     // console.log("hostingarray: ", this.props.userHostingExperiencesDataArray);
-    if (!this.props.userHostingExperiencesDataArray) {
+    if (!this.props.specificExperienceObject) {
       return <Spinner color="info" />;
     } else
       return (
@@ -81,14 +89,54 @@ class SpecificHostingExperiences extends Component {
               </Button>
             </Nav>
           </Navbar>
-          {this.props.userHostingExperiencesDataArray.map(
-            hostingExperienceObj => (
-              <div>{hostingExperienceObj.title}</div>
-            )
-          )}
+          <div className="specific-hosting-experience">
+            <div className="specific-hosting-experience-title">
+              {this.props.specificExperienceObject.title}
+            </div>
+            <div className="specific-hosting-experience-description">
+              {this.props.specificExperienceObject.description}
+            </div>
+            <div className="specific-hosting-experience-location">
+              {this.props.specificExperienceObject.location}
+            </div>
+            <div className="specific-hosting-experience-date">
+              {this.props.specificExperienceObject.date}
+            </div>
+            <div className="specific-hosting-experience-price">
+              {this.props.specificExperienceObject.price}
+            </div>
+            <Link to={`/edit-experience/${specificExperienceId}`}>
+              <Button color="info">Edit</Button>
+            </Link>
+            <Button color="danger" onClick={this.handleDelete}>
+              Delete
+            </Button>
+          </div>
         </div>
       );
   }
+  handleEdit = event => {
+    event.preventDefault();
+  };
+  handleDelete = event => {
+    const specificExperienceId = this.props.match.params.experienceId;
+    event.preventDefault();
+    this.props.deleteSpecificExperience(specificExperienceId).then(response => {
+      this.props.history.push("/hosting-experiences");
+    });
+  };
+  changeHandler = event => {
+    const userId = localStorage.getItem("user_id");
+    event.preventDefault();
+    this.setState({
+      ...this.state,
+      updatedExperience: {
+        ...this.state.updatedExperience,
+        user_id: userId,
+        [event.target.name]: event.target.value
+      }
+    });
+  };
   logout = event => {
     event.preventDefault();
     localStorage.clear();
@@ -102,12 +150,12 @@ const mapStateToProps = state => {
     message: state.message,
     userData: state.userData,
     userId: state.userId,
-    userHostingExperiencesDataArray: state.userHostingExperiencesDataArray
+    specificExperienceObject: state.specificExperienceObject
   };
 };
 
 // linking mapStateToProps, action creators to PostedExperiences component
 export default connect(
   mapStateToProps,
-  { getUserHostingExperiencesData }
+  { getSpecificExperience, deleteSpecificExperience }
 )(SpecificHostingExperiences);

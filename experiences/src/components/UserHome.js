@@ -84,7 +84,12 @@ class UserHome extends Component {
                 </div>
               </NavLink>
             </NavItem>
-            <Button inline color="secondary" size="sm" onClick={this.logout}>
+            <Button
+              inline="true"
+              color="secondary"
+              size="sm"
+              onClick={this.logout}
+            >
               Logout
             </Button>
           </Nav>

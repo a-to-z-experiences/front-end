@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import link so you can link stuff
 import { Link } from "react-router-dom";
-import { getUserHostingExperiencesData } from "../actions";
+import { getSpecificExperience } from "../actions";
 // import Buthrefn and other stuff from reactstrap component
 import {
   Button,
@@ -35,13 +35,13 @@ const divNav = {
   margin: "0 auto",
   marginBottom: "20px"
 };
-class SpecificHostingExperiences extends Component {
+class SpecificAttendingExperience extends Component {
   state = {
     // userHostingExperiencesDataArray: this.props.userHostingExperiencesDataArray,
     // filteredUserHostingExperiencesDataArray: {}
   };
   componentDidMount() {
-    this.props.getUserHostingExperiencesData(localStorage.getItem("user_id"));
+    // this.props.getUserHostingExperiencesData(localStorage.getItem("user_id"));
   }
   render() {
     // console.log("hostingarray: ", this.props.userHostingExperiencesDataArray);
@@ -76,7 +76,7 @@ class SpecificHostingExperiences extends Component {
                   </div>
                 </NavLink>
               </NavItem>
-              <Button inline color="secondary" size="sm" onClick={this.logout}>
+              <Button inline="true" color="secondary" size="sm" onClick={this.logout}>
                 Logout
               </Button>
             </Nav>
@@ -109,5 +109,5 @@ const mapStateToProps = state => {
 // linking mapStateToProps, action creators to PostedExperiences component
 export default connect(
   mapStateToProps,
-  { getUserHostingExperiencesData }
-)(SpecificHostingExperiences);
+  { getSpecificExperience }
+)(SpecificAttendingExperience);

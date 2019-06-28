@@ -83,7 +83,23 @@ class HostingExperiences extends Component {
           </Navbar>
           {this.props.userHostingExperiencesDataArray.map(
             hostingExperienceObj => (
-              <div>{hostingExperienceObj.title}</div>
+              <Link
+                to={`/hosting-experiences/${hostingExperienceObj.id}`}
+                style={{ textDecoration: "none" }}
+                key={hostingExperienceObj.id}
+              >
+                <div className="hosting-experience">
+                  <div className="hosting-experience-title">
+                    {hostingExperienceObj.title}
+                  </div>
+                  <div className="hosting-experience-date">
+                    {hostingExperienceObj.date}
+                  </div>
+                  <div className="hosting-experience-location">
+                    {hostingExperienceObj.location}
+                  </div>
+                </div>
+              </Link>
             )
           )}
         </div>
